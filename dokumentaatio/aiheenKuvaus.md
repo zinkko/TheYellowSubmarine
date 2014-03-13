@@ -5,5 +5,7 @@ Pelin ideana on keksiä paras reitti alueen läpi ja arvioida paluumatkaa pinnal
 jotta saa mahdollisimman paljon rahaa, ja selviää hengissä takaisin. Kartalla onmyös kiviä jotka estävät pelaajan liikkuvuutta, ja pelaaja voi joutua umpikujaan jos ei ole varovainen. 
 
 
-vaikeustasoa voi säädellä rajoittamalla pelaajan näkymää: normaalilla/vaikealla
+Vaikeustasoa voi säädellä rajoittamalla pelaajan näkymää: normaalilla/vaikealla
 tasolla pelaaja ei näe koko aluetta kerralla, vaan pienehkön alueen sukellusveneensä ympärillä
+
+Peliin voi lisätä featureita josta kuten kaupan jossa voi tuhlata rahansa kehittämällä omaa sukellusvenettä. Peliin voi myös tehdä erilaisia levelejä, achievementtejä ym. 
