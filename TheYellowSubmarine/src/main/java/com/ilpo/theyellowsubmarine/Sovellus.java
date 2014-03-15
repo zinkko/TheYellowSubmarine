@@ -2,6 +2,7 @@ package com.ilpo.theyellowsubmarine;
 
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.logiikka.SovellusOhjain;
+import javax.swing.SwingUtilities;
 
 /**
  * Hello world!
@@ -12,6 +13,6 @@ public class Sovellus {
     private SovellusOhjain kontrolleri;
             
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        SwingUtilities.invokeLater(new Kayttoliittyma());
     }
 }

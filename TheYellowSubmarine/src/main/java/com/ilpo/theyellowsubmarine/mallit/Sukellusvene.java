@@ -6,10 +6,24 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author ilari
  */
 public class Sukellusvene {
+    private int x, y;
+    private int happiTaso; // jos happi loppuu, käy huonosti
     
+    public Sukellusvene(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
+    
+    public void piirra(Graphics g){
+        g.setColor(Color.YELLOW);
+        g.fillOval(x-10, y-5, 20, 10);
+    }
 }

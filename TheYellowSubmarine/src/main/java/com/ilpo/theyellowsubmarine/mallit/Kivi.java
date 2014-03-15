@@ -11,5 +11,5 @@ package com.ilpo.theyellowsubmarine.mallit;
  * @author ilari
  */
 public class Kivi {
-    
+    int x,y,width,height;
 }
