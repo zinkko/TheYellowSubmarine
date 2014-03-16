@@ -13,11 +13,11 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
  *
  * @author ilari
  */
-public class PelinOhjain {
+public class PeliLogiikka {
     private Kartta kartta;
     private Sukellusvene vene;
     
-    public PelinOhjain(Kartta kartta, Sukellusvene vene){
+    public PeliLogiikka(Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
     }

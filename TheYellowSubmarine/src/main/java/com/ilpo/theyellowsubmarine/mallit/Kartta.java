@@ -9,24 +9,42 @@ package com.ilpo.theyellowsubmarine.mallit;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  *
  * @author ilari
  */
 public class Kartta {
-    private LinkedList<Aarre> aarteet;
-    private LinkedList<Kivi> kivet; // ts. esteet kartalla
-    private int pituus, leveys;
+    private final LinkedList<Aarre> aarteet;
+    private final LinkedList<Kivi> kivet; // ts. esteet kartalla
+    private int leveys, korkeus;
+    private Random random;
     
     public Kartta(int pituus, int leveys){
         this.aarteet = new LinkedList<>();
         this.kivet = new LinkedList<>();
     }
     
-    public void piirra(Graphics g){
-        g.setColor(Color.BLUE);
-        g.fillRect(0, 0, pituus, leveys);
+    private void generoiAarteet(int maara){
+        for (int i=0;i<maara;i++){
+            generoiAarre(5); // TODO: jännempi arvo aarteille
+        }
     }
     
+    private void generoiAarre(int arvo){
+        int x = random.nextInt(leveys-10)+5;
+        int y = random.nextInt(korkeus-10)+5;
+        Aarre uusiAarre = new Aarre(x,y,arvo);
+        this.aarteet.add(uusiAarre);
+    }
+    
+    public void piirra(Graphics g){
+        g.setColor(Color.BLUE);
+        g.fillRect(0, 0, leveys, korkeus);
+    }
+
+    public LinkedList<Aarre> getAarteet() {
+        return aarteet;
+    }
 }

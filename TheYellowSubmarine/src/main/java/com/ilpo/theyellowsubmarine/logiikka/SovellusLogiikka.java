@@ -10,7 +10,7 @@ package com.ilpo.theyellowsubmarine.logiikka;
  *
  * @author ilari
  */
-public class SovellusOhjain {
+public class SovellusLogiikka {
     // tänne tulee pelin menun yms. logiikka. Siis kaiken muun kuin itse
     // pelin ominaisuudet hallitaan täältä.
 }
