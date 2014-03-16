@@ -6,10 +6,24 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
+import com.ilpo.theyellowsubmarine.mallit.Kartta;
+import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+
 /**
  *
  * @author ilari
  */
 public class PelinOhjain {
+    private Kartta kartta;
+    private Sukellusvene vene;
     
+    public PelinOhjain(Kartta kartta, Sukellusvene vene){
+        this.kartta = kartta;
+        this.vene = vene;
+    }
+    
+
+    public void teeJtn(){ // TODO: rename this
+        
+    }
 }

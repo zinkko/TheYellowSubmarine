@@ -17,9 +17,14 @@ public class Sukellusvene {
     private int x, y;
     private int happiTaso; // jos happi loppuu, käy huonosti
     
-    public Sukellusvene(int x, int y){
+    public Sukellusvene(int x, int y, int happiTaso){
         this.x=x;
         this.y=y;
+        this.happiTaso = happiTaso;
+    }
+    
+    public boolean hengissa(){
+        return this.happiTaso>0;
     }
     
     public void piirra(Graphics g){
