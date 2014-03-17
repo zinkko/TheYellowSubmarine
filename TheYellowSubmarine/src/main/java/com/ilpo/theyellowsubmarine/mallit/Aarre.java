@@ -34,4 +34,8 @@ public class Aarre {
         
         return c2 < pituus*pituus;
     }
+    
+    public int getArvo(){
+        return arvo;
+    }
 }

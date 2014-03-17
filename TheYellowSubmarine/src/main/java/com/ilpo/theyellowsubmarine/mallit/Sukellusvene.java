@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ilpo.theyellowsubmarine.mallit;
 
 import java.awt.Color;
@@ -14,26 +13,47 @@ import java.awt.Graphics;
  * @author ilari
  */
 public class Sukellusvene {
-    private int x, y,leveys,korkeus;
+
+    private int x, y, leveys, korkeus;
     private int happiTaso; // jos happi loppuu, käy huonosti
-    
-    public Sukellusvene(int x, int y, int happiTaso){
-        this.x=x;
-        this.y=y;
+    private int nopeusX, nopeusY; // pts/aikayksikkö
+
+    public Sukellusvene(int x, int y, int happiTaso) {
+        this.x = x;
+        this.y = y;
         this.leveys = 20;
         this.korkeus = 10;
         this.happiTaso = happiTaso;
     }
 
-    public boolean hengissa(){
-        return this.happiTaso>0;
+    public void liiku() {
+        this.x += nopeusX;
+        this.y += nopeusY;
+        happiTaso--;
     }
-    
-    public void piirra(Graphics g){
+
+    public void kiihdyta(int accX, int accY) {
+        this.nopeusX += accX;
+        this.nopeusY += accY;
+    }
+
+    public boolean hengissa() {
+        return this.happiTaso > 0;
+    }
+
+    public void piirra(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillOval(x-leveys/2, y-korkeus/2, leveys, korkeus);
+        g.fillOval(x - leveys/2, y - korkeus/2, leveys, korkeus);
     }
-    
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public int getX() {
         return x;
     }

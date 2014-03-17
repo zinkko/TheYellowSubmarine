@@ -24,12 +24,23 @@ public class Kartta {
     public Kartta(int pituus, int leveys){
         this.aarteet = new LinkedList<>();
         this.kivet = new LinkedList<>();
+        this.generoiAarteet(10);
     }
+    
+    
     
     private void generoiAarteet(int maara){
         for (int i=0;i<maara;i++){
-            generoiAarre(5); // TODO: jännempi arvo aarteille
+            generoiAarre(5); // TODO: jännempi arvo aarteiden arvoille
         }
+    }
+
+    public int getLeveys() {
+        return leveys;
+    }
+
+    public int getKorkeus() {
+        return korkeus;
     }
     
     private void generoiAarre(int arvo){
@@ -46,5 +57,9 @@ public class Kartta {
 
     public LinkedList<Aarre> getAarteet() {
         return aarteet;
+    }
+    
+    public void poista(Aarre a){
+        this.aarteet.remove(a);
     }
 }
