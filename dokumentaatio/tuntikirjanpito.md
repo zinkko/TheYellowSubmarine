@@ -16,4 +16,9 @@ tein luokkarungon
 
 16.3
 ====
+tunti logiikan koodausta, testeille rungot
+
+17.3
+====
+tunti logiikan koodausta.
 

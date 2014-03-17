@@ -19,6 +19,7 @@ public class Kartta {
     private final LinkedList<Aarre> aarteet;
     private final LinkedList<Kivi> kivet; // ts. esteet kartalla
     private int leveys, korkeus;
+    private int alkuX, alkuY;
     private Random random;
     
     public Kartta(int pituus, int leveys){

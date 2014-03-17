@@ -15,7 +15,7 @@ import java.awt.Graphics;
 public class Sukellusvene {
 
     private int x, y, leveys, korkeus;
-    private int happiTaso; // jos happi loppuu, käy huonosti
+    private int happitaso; // jos happi loppuu, käy huonosti
     private int nopeusX, nopeusY; // pts/aikayksikkö
 
     public Sukellusvene(int x, int y, int happiTaso) {
@@ -23,13 +23,13 @@ public class Sukellusvene {
         this.y = y;
         this.leveys = 20;
         this.korkeus = 10;
-        this.happiTaso = happiTaso;
+        this.happitaso = happiTaso;
     }
 
     public void liiku() {
         this.x += nopeusX;
         this.y += nopeusY;
-        happiTaso--;
+        happitaso--;
     }
 
     public void kiihdyta(int accX, int accY) {
@@ -38,7 +38,7 @@ public class Sukellusvene {
     }
 
     public boolean hengissa() {
-        return this.happiTaso > 0;
+        return this.happitaso > 0;
     }
 
     public void piirra(Graphics g) {
@@ -71,6 +71,6 @@ public class Sukellusvene {
     }
 
     public int getHappiTaso() {
-        return happiTaso;
+        return happitaso;
     }
 }

@@ -14,14 +14,17 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
  *
  * @author ilari
  */
-public class PeliLogiikka {
+public class Pelilogiikka {
     private Kartta kartta;
     private Sukellusvene vene;
     private int pelaajanRahat = 0;
+    private int alkuX, alkuY;
+    private int[] maali;
     
-    public PeliLogiikka(Kartta kartta, Sukellusvene vene){
+    public Pelilogiikka(Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
+        maali = new int[]{0,0,50,50};
     }
     
     /**
@@ -35,11 +38,16 @@ public class PeliLogiikka {
         return vene.hengissa();
     }
     
+    public boolean onkoPelaajaMaalissa(){
+        boolean ret = maali[0] < vene.getX() && vene.getX() < maali[0] + maali[2];
+        return ret && maali[1] < vene.getY() && vene.getY() < maali[1] +maali[3];
+    }
+    
     private void pidaPelaajaKartalla(){
         if (vene.getX()<0) vene.setX(0);
         if (vene.getY()<0) vene.setY(0);
-        if (vene.getX()>kartta.getLeveys()) vene.setX(kartta.getLeveys());
-        if (vene.getY()>kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
+        if (vene.getX() > kartta.getLeveys()) vene.setX(kartta.getLeveys());
+        if (vene.getY()> kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
     }
     
     private void tarkistaAarteet(){
