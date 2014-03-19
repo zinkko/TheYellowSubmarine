@@ -19,12 +19,10 @@ public class Pelilogiikka {
     private Sukellusvene vene;
     private int pelaajanRahat = 0;
     private int alkuX, alkuY;
-    private int[] maali;
     
     public Pelilogiikka(Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
-        maali = new int[]{0,0,50,50};
     }
     
     /**
@@ -36,11 +34,6 @@ public class Pelilogiikka {
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         return vene.hengissa();
-    }
-    
-    public boolean onkoPelaajaMaalissa(){
-        boolean ret = maali[0] < vene.getX() && vene.getX() < maali[0] + maali[2];
-        return ret && maali[1] < vene.getY() && vene.getY() < maali[1] +maali[3];
     }
     
     private void pidaPelaajaKartalla(){

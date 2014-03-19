@@ -6,6 +6,8 @@
 
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
+import com.ilpo.theyellowsubmarine.mallit.Kartta;
+import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -19,9 +21,11 @@ import javax.swing.WindowConstants;
 public class Kayttoliittyma implements Runnable{
     
     private final JFrame frame;
+    private Piirtaja piirtaja;
     
-    public Kayttoliittyma(){
+    public Kayttoliittyma(Kartta k, Sukellusvene v){
         this.frame = new JFrame();
+        this.piirtaja = new Piirtaja(k,v);
     }
     
     @Override

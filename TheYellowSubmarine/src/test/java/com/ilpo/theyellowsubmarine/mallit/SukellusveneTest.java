@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
  */
 public class SukellusveneTest {
     
+    private Sukellusvene vene;
+    private int alkuX, alkuY;
     public SukellusveneTest() {
     }
     
@@ -32,6 +34,9 @@ public class SukellusveneTest {
     
     @Before
     public void setUp() {
+        alkuX = 10;
+        alkuY = 10;
+        this.vene = new Sukellusvene(alkuX,alkuY,5);
     }
     
     @After
@@ -43,4 +48,43 @@ public class SukellusveneTest {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void happiKuluuOikein(){
+        int happea = vene.getHappiTaso();
+        vene.liiku();
+        vene.liiku();
+        assertEquals(vene.getHappiTaso(), happea -2);
+    }
+    
+    @Test
+    public void hengissaMetodiToimii1(){
+        vene.liiku();
+        vene.liiku();
+        assertTrue(vene.hengissa());
+    }
+    
+    @Test
+    public void hengissaMetodiToimii2(){
+        for (int i=0;i<6;i++) vene.liiku();
+        assertFalse(vene.hengissa());
+    }
+    
+    @Test
+    public void alussaVeneEiLiiku(){
+        vene.liiku();
+        vene.liiku();
+        assertEquals(vene.getX(),alkuX);
+        assertEquals(vene.getY(),alkuY);
+    }
+    
+    @Test
+    public void veneLiikkuuNopeudenMukaan(){
+        int nx = 2; int ny = 3;
+        vene.setNopeus(nx, ny);
+        vene.liiku();
+        vene.liiku();
+        assertEquals(vene.getX(), alkuX + 2*nx);
+        assertEquals(vene.getY(), alkuY + 2*ny);
+    }
 }

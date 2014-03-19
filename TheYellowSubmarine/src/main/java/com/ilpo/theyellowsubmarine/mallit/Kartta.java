@@ -22,10 +22,13 @@ public class Kartta {
     private int alkuX, alkuY;
     private Random random;
     
-    public Kartta(int pituus, int leveys){
+    public Kartta(int leveys, int korkeus, int aarteidenMaara){
         this.aarteet = new LinkedList<>();
         this.kivet = new LinkedList<>();
-        this.generoiAarteet(10);
+        this.random = new Random();
+        this.korkeus = korkeus;
+        this.leveys = leveys;
+        this.generoiAarteet(aarteidenMaara);
     }
     
     

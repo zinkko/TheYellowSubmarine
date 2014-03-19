@@ -29,9 +29,9 @@ public class Sukellusvene {
     public void liiku() {
         this.x += nopeusX;
         this.y += nopeusY;
-        happitaso--;
+        if (happitaso>0) happitaso--;
     }
-
+    
     public void kiihdyta(int accX, int accY) {
         this.nopeusX += accX;
         this.nopeusY += accY;
@@ -45,7 +45,12 @@ public class Sukellusvene {
         g.setColor(Color.YELLOW);
         g.fillOval(x - leveys/2, y - korkeus/2, leveys, korkeus);
     }
-
+    
+    public void setNopeus(int x, int y){
+        this.nopeusX = x;
+        this.nopeusY = y;
+    }
+    
     public void setX(int x) {
         this.x = x;
     }

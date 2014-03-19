@@ -43,4 +43,33 @@ public class KarttaTest {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void luontiGeneroiOikeanMaaranAarteita(){
+        int maara = 47;
+        Kartta k = new Kartta(100,100,maara);
+        assertEquals(k.getAarteet().size(),maara);
+    }
+    
+    @Test
+    public void aarteidenPoistoToimii(){
+        int maara = 47;
+        Kartta k = new Kartta(100,100,maara);
+        Aarre eka = k.getAarteet().get(0);
+        Aarre toka = k.getAarteet().get(1);
+        k.poista(eka);
+        k.poista(toka);
+        assertEquals(k.getAarteet().size(),maara-2);
+    }
+    
+    @Test
+    public void aarteidenPoistoToimii2(){
+        int maara = 47;
+        Kartta k = new Kartta(100,100,maara);
+        Aarre a = k.getAarteet().get(15);
+        k.poista(a);
+        assertFalse(k.getAarteet().contains(a));
+    }
+    
+    
 }
