@@ -87,4 +87,13 @@ public class SukellusveneTest {
         assertEquals(vene.getX(), alkuX + 2*nx);
         assertEquals(vene.getY(), alkuY + 2*ny);
     }
+    
+    @Test
+    public void kiihdytysToimii(){
+        int x = 4; int y = -2;
+        vene.kiihdyta(x, y);
+        vene.liiku();
+        assertEquals(vene.getX(), alkuX + x);
+        assertEquals(vene.getY(), alkuY + y);
+    }
 }
