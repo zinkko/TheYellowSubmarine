@@ -40,6 +40,8 @@ public class Kayttoliittyma implements Runnable{
     }
     
     private void luoKomponentit(Container c){
-        c.add(new JButton("Hello world!"));
+        c.add(this.piirtaja);
+        this.piirtaja.addKeyListener(new PeliKuuntelija(this));
+        this.piirtaja.setFocusable(true);
     }
 }

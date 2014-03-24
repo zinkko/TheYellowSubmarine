@@ -16,19 +16,47 @@ import java.awt.event.KeyListener;
  */
 public class PeliKuuntelija implements KeyListener{
 
+    private Kayttoliittyma kali;
+    
+    public PeliKuuntelija(Kayttoliittyma kali){
+        this.kali = kali;
+    }
+    
     @Override
-    public void keyTyped(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void keyTyped(KeyEvent e) {
+        
     }
 
     @Override
-    public void keyPressed(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch(code){
+            case KeyEvent.VK_W:
+                break;
+            case KeyEvent.VK_A:
+                break;
+            case KeyEvent.VK_S:
+                break;
+            case KeyEvent.VK_D:
+                break;
+            default:
+                System.out.println("Hello world");
+        }
     }
 
     @Override
-    public void keyReleased(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch(code){
+            case KeyEvent.VK_W:
+                break;
+            case KeyEvent.VK_A:
+                break;
+            case KeyEvent.VK_S:
+                break;
+            case KeyEvent.VK_D:
+                break;
+        }
     }
     
 }
