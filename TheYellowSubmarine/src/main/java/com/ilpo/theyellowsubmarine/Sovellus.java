@@ -12,9 +12,9 @@ import javax.swing.SwingUtilities;
  *
  */
 public class Sovellus{
-    private Kayttoliittyma kayttoliittyma;
+    private final Kayttoliittyma kayttoliittyma;
     private Sovelluslogiikka kontrolleri;
-    private Pelilogiikka logiikka;
+    private final Pelilogiikka logiikka;
     
     public Sovellus() {
         Kartta k = new Kartta(500,500,10);

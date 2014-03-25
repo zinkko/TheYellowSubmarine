@@ -18,11 +18,11 @@ import java.util.logging.Logger;
  * @author ilari
  */
 public class Pelilogiikka implements Runnable{
-    private Kartta kartta;
-    private Sukellusvene vene;
+    private final Kartta kartta;
+    private final Sukellusvene vene;
     private int pelaajanRahat = 0;
     private int alkuX, alkuY;
-    private Sovellus app;
+    private final Sovellus app;
     
     public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;

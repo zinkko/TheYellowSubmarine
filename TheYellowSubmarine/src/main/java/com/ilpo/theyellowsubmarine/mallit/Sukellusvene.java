@@ -25,18 +25,32 @@ public class Sukellusvene {
         this.korkeus = 20;
         this.happitaso = happiTaso;
     }
-
+    /**
+     * @deprecated 
+     */
     public void liiku() {
         this.x += nopeusX;
         this.y += nopeusY;
         if (happitaso>0) happitaso--;
     }
     
+    public void kulutaHappi(){
+        if (happitaso>0) happitaso--;
+    }
+    
+    public void liikuVaakatasossa(){
+        if (this.nopeusX<0) this.x++;
+        else this.x --;
+    }
+    
+    public void liikuPystytasossa(){
+        if (this.nopeusY>0) this.y++;
+        else this.y--;
+    }
+    
     public void kiihdyta(int accX, int accY) {
         this.nopeusX += accX;
         this.nopeusY += accY;
-        
-        System.out.println("hallo!");
     }
 
     public boolean hengissa() {
@@ -79,5 +93,13 @@ public class Sukellusvene {
 
     public int getHappiTaso() {
         return happitaso;
+    }
+    
+    public int getNopeusX(){
+        return nopeusX;
+    }
+    
+    public int getNopeusY(){
+        return nopeusY;
     }
 }
