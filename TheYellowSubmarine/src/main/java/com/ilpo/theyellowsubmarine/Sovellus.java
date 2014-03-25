@@ -20,8 +20,8 @@ public class Sovellus{
         Kartta k = new Kartta(500,500,10);
         Sukellusvene v = new Sukellusvene(100,100,10000);
         
-        logiikka = new Pelilogiikka(k,v);
-        kayttoliittyma = new Kayttoliittyma(logiikka,k,v);
+        logiikka = new Pelilogiikka(this,k,v);
+        kayttoliittyma = new Kayttoliittyma(this,k,v);
         
     }
     
@@ -33,6 +33,10 @@ public class Sovellus{
     
     public void move(int direction){
         this.logiikka.move(direction);
+    }
+    
+    public void maalaa(){
+        this.kayttoliittyma.maalaa();
     }
 
     public Kayttoliittyma getKayttoliittyma() {

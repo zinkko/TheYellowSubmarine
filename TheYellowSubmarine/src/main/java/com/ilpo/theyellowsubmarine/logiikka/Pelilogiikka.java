@@ -10,20 +10,37 @@ import com.ilpo.theyellowsubmarine.Sovellus;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ilari
  */
-public class Pelilogiikka {
+public class Pelilogiikka implements Runnable{
     private Kartta kartta;
     private Sukellusvene vene;
     private int pelaajanRahat = 0;
     private int alkuX, alkuY;
+    private Sovellus app;
     
-    public Pelilogiikka(Kartta kartta, Sukellusvene vene){
+    public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
+        this.app = app;
+    }
+    
+    @Override
+    public void run(){
+        while (true){
+            try {
+                teeJtn();
+                Thread.sleep(500);
+                app.maalaa();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     /**

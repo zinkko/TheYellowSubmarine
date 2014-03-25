@@ -35,6 +35,8 @@ public class Sukellusvene {
     public void kiihdyta(int accX, int accY) {
         this.nopeusX += accX;
         this.nopeusY += accY;
+        
+        System.out.println("hallo!");
     }
 
     public boolean hengissa() {
