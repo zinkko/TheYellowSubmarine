@@ -6,6 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -16,6 +17,7 @@ public class Kivi {
     int x,y,width,height;
     
     public void piirra(Graphics g){
-        
+        g.setColor(Color.GRAY);
+        g.fillRect(x, y, width, height);
     }
 }

@@ -17,6 +17,7 @@ public class Sukellusvene {
     private int x, y, leveys, korkeus;
     private int happitaso; // jos happi loppuu, käy huonosti
     private int nopeusX, nopeusY; // pts/aikayksikkö
+    private int maxNopeus = 10;
 
     public Sukellusvene(int x, int y, int happiTaso) {
         this.x = x;
@@ -51,6 +52,9 @@ public class Sukellusvene {
     public void kiihdyta(int accX, int accY) {
         this.nopeusX += accX;
         this.nopeusY += accY;
+        
+        if (nopeusX>this.maxNopeus) nopeusX = maxNopeus;
+        if (nopeusY>this.maxNopeus) nopeusY = maxNopeus;
     }
 
     public boolean hengissa() {

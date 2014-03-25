@@ -21,13 +21,14 @@ public class Pelilogiikka implements Runnable{
     private final Kartta kartta;
     private final Sukellusvene vene;
     private int pelaajanRahat = 0;
-    private int alkuX, alkuY;
     private final Sovellus app;
+    private final Fysiikka fysiikka;
     
     public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
         this.app = app;
+        this.fysiikka = new Fysiikka(vene);
     }
     
     @Override
@@ -35,7 +36,7 @@ public class Pelilogiikka implements Runnable{
         while (true){
             try {
                 teeJtn();
-                Thread.sleep(500);
+                Thread.sleep(20);
                 app.maalaa();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,7 +49,8 @@ public class Pelilogiikka implements Runnable{
      * @return false jos peli on ohi.
      */
     public boolean teeJtn(){ // TODO: rename this
-        vene.liiku();
+        //vene.liiku();
+        this.fysiikka.seuraava();
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         return vene.hengissa();
@@ -81,6 +83,7 @@ public class Pelilogiikka implements Runnable{
         if (vene.getY()> kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
     }
     
+    // TODO: convert to iterator!!!!
     private void tarkistaAarteet(){
         for (Aarre aarre: kartta.getAarteet()){
             if (aarre.voidaanKerata(vene)){
