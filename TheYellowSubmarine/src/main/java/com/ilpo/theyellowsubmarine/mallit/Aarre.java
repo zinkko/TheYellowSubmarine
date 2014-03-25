@@ -6,6 +6,9 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author ilari
@@ -16,7 +19,7 @@ public class Aarre {
     int arvo;
     
     public Aarre(int x, int y, int arvo){
-        this.x=y;
+        this.x=x;
         this.y=y;
         this.arvo=arvo;
     }
@@ -37,5 +40,10 @@ public class Aarre {
     
     public int getArvo(){
         return arvo;
+    }
+    
+    public void piirra(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillOval(x, y, 2*pituus, 2*pituus);
     }
 }

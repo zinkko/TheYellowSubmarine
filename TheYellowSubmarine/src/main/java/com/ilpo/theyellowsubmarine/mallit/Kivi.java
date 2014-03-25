@@ -6,10 +6,16 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author ilari
  */
 public class Kivi {
     int x,y,width,height;
+    
+    public void piirra(Graphics g){
+        
+    }
 }

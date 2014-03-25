@@ -6,6 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
+import com.ilpo.theyellowsubmarine.Sovellus;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
@@ -34,6 +35,26 @@ public class Pelilogiikka {
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         return vene.hengissa();
+    }
+    
+    public void move(int direction){
+        int dx = 0;
+        int dy = 0;
+        switch (direction){
+            case 0:
+                dx = 1;
+                break;
+            case 1:
+                dx = -1;
+                break;
+            case 2:
+                dy = 1;
+                break;
+            case 3:
+                dy = -1;
+                break;
+        }
+        vene.kiihdyta(dx, dy);
     }
     
     private void pidaPelaajaKartalla(){

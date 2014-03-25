@@ -30,17 +30,25 @@ public class PeliKuuntelija implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        int direction = -5;
         switch(code){
             case KeyEvent.VK_W:
+                direction = 3;
                 break;
             case KeyEvent.VK_A:
+                direction = 1;
                 break;
             case KeyEvent.VK_S:
+                direction = 2;
                 break;
             case KeyEvent.VK_D:
+                direction = 0;
                 break;
             default:
                 System.out.println("Hello world");
+        }
+        if (direction != -5){
+            kali.move(direction);
         }
     }
 

@@ -21,8 +21,8 @@ public class Sukellusvene {
     public Sukellusvene(int x, int y, int happiTaso) {
         this.x = x;
         this.y = y;
-        this.leveys = 20;
-        this.korkeus = 10;
+        this.leveys = 40;
+        this.korkeus = 20;
         this.happitaso = happiTaso;
     }
 
