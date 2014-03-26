@@ -56,8 +56,11 @@ public class Pelilogiikka implements Runnable{
         this.tarkistaAarteet();
         return vene.hengissa();
     }
-    
-    public void move(int direction){
+    /**
+     * 
+     * @param direction suunta johon sukellusvene lähtee kiihdyttämään 
+     */
+    public void move(int direction){ 
         int dx = 0;
         int dy = 0;
         switch (direction){
