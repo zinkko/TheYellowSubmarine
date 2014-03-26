@@ -40,7 +40,7 @@ public class Sukellusvene {
     }
     
     public void liikuVaakatasossa(){
-        if (this.nopeusX<0) this.x++;
+        if (this.nopeusX>0) this.x++;
         else this.x --;
     }
     
@@ -90,9 +90,17 @@ public class Sukellusvene {
     public int getLeveys() {
         return leveys;
     }
-
+    
     public int getKorkeus() {
         return korkeus;
+    }
+    
+    public int getOikeaReuna(){
+        return x + this.leveys;
+    }
+    
+    public int getAlareuna(){
+        return y + this.korkeus;
     }
 
     public int getHappiTaso() {

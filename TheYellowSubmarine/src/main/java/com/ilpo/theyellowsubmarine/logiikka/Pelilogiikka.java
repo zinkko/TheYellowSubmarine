@@ -10,6 +10,7 @@ import com.ilpo.theyellowsubmarine.Sovellus;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,8 +37,8 @@ public class Pelilogiikka implements Runnable{
         while (true){
             try {
                 teeJtn();
-                Thread.sleep(20);
                 app.maalaa();
+                Thread.sleep(20);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -85,10 +86,13 @@ public class Pelilogiikka implements Runnable{
     
     // TODO: convert to iterator!!!!
     private void tarkistaAarteet(){
-        for (Aarre aarre: kartta.getAarteet()){
+        Iterator<Aarre> aarteet = kartta.getAarteet().iterator();
+        Aarre aarre;
+        while (aarteet.hasNext()){
+            aarre = aarteet.next();
             if (aarre.voidaanKerata(vene)){
                 this.pelaajanRahat += aarre.getArvo();
-                kartta.poista(aarre);
+                aarteet.remove();
             }
         }
     }

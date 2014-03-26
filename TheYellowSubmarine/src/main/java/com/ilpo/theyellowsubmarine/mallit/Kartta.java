@@ -28,10 +28,25 @@ public class Kartta {
         this.random = new Random();
         this.korkeus = korkeus;
         this.leveys = leveys;
+        this.generoiKivet();
         this.generoiAarteet(aarteidenMaara);
     }
     
+    private void generoiKivet(){
+        int x,y;
+        for (int i=1;i<4;i++){
+            x = random.nextInt(50) + i*100;
+            y = random.nextInt(300) + 50;
+            generoiKivi(x,y);
+        }
+    }
     
+    private void generoiKivi(int x, int y){
+        int lev = random.nextInt(20)+30;
+        int kork = random.nextInt(20)+30;
+        Kivi kivi = new Kivi(x,y,lev,kork);
+        this.kivet.add(kivi);
+    }
     
     private void generoiAarteet(int maara){
         for (int i=0;i<maara;i++){
@@ -71,7 +86,4 @@ public class Kartta {
         return aarteet;
     }
     
-    public void poista(Aarre a){
-        this.aarteet.remove(a);
-    }
 }

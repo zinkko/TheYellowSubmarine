@@ -15,7 +15,7 @@ import java.awt.Graphics;
  */
 public class Aarre {
     int x,y;
-    int pituus = 5;
+    int sade = 5;
     int arvo;
     
     public Aarre(int x, int y, int arvo){
@@ -30,12 +30,11 @@ public class Aarre {
      * @return true joss sukellusvene on tarpeeksi lähellä kerätäkseen aarteen
      */
     public boolean voidaanKerata(Sukellusvene vene){
-        int dx = Math.abs(x-vene.getX());
-        int dy = Math.abs(y-vene.getY());
-        
-        int c2 = dx*dx + dy*dy; // a² + b²
-        
-        return c2 < pituus*pituus;
+        int dx = Math.abs(vene.getX() - x);
+        int dy = Math.abs(vene.getY() - y);
+        // a² + b² = c²
+        int etaisyys = vene.getKorkeus()/2+ sade;
+        return (dx*dx + dy*dy) < etaisyys*etaisyys;
     }
     
     public int getArvo(){
@@ -44,6 +43,6 @@ public class Aarre {
     
     public void piirra(Graphics g){
         g.setColor(Color.GREEN);
-        g.fillOval(x, y, 2*pituus, 2*pituus);
+        g.fillOval(x-sade,y-sade, 2*sade, 2*sade);
     }
 }
