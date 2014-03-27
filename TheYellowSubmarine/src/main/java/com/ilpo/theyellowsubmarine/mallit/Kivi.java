@@ -25,8 +25,8 @@ public class Kivi {
     
     public boolean tormaa(Sukellusvene vene){
         int vx = vene.getX(); int vy = vene.getY();
-        boolean a = (vx < x&&x < vene.getOikeaReuna() ) || (x < vx&&vx < x+width);
-        boolean b = (vy <y&&y < vene.getAlareuna() ) || (y < vy&&vy < y + height);
+        boolean a = (vx <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+width);
+        boolean b = (vy <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + height);
         return a && b;
     }
     

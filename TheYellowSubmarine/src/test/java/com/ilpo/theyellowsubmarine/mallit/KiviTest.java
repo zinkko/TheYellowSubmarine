@@ -50,13 +50,13 @@ public class KiviTest {
     
     @Test
     public void tormaaOikeinJosVeneRajalla(){
-        Sukellusvene vene = new Sukellusvene(8,70,1);
+        Sukellusvene vene = new Sukellusvene(10,40,1);
         assertTrue(kivi.tormaa(vene));
     }
     
     @Test
     public void tormaaOikeinJosVeneEiTormaa(){
-        Sukellusvene vene = new Sukellusvene(10,40,1);
+        Sukellusvene vene = new Sukellusvene(8,70,1);
         assertFalse(kivi.tormaa(vene));
     }
     
