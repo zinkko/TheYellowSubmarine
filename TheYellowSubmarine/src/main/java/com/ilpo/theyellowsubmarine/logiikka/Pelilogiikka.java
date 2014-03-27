@@ -87,7 +87,6 @@ public class Pelilogiikka implements Runnable{
         if (vene.getY()> kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
     }
     
-    // TODO: convert to iterator!!!!
     private void tarkistaAarteet(){
         Iterator<Aarre> aarteet = kartta.getAarteet().iterator();
         Aarre aarre;

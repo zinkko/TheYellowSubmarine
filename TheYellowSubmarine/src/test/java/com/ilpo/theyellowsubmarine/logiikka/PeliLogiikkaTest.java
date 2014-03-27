@@ -43,4 +43,9 @@ public class PeliLogiikkaTest {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void pelaajaPysyyKartalla(){
+        
+    }
 }

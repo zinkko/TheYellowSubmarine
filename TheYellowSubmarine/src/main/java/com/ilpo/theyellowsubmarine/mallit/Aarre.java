@@ -14,9 +14,21 @@ import java.awt.Graphics;
  * @author ilari
  */
 public class Aarre {
-    int x,y;
-    int sade = 5;
-    int arvo;
+    private final int x,y;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getSade() {
+        return sade;
+    }
+    private final int sade = 5;
+    private final int arvo;
     
     public Aarre(int x, int y, int arvo){
         this.x=x;

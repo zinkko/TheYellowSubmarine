@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.ilpo.theyellowsubmarine.mallit;
+package com.ilpo.theyellowsubmarine.logiikka;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author ilari
  */
-public class AarreTest {
+public class FysiikkaTest {
     
-    public AarreTest() {
+    public FysiikkaTest() {
     }
     
     @BeforeClass
@@ -45,9 +45,12 @@ public class AarreTest {
     // public void hello() {}
     
     @Test
-    public void keraysToimii(){
+    public void nopeusToimii(){
         
     }
     
-    
+    @Test
+    public void kiihdytysToimii(){
+        
+    }
 }

@@ -23,6 +23,20 @@ public class Kivi {
         this.height = height;
     }
     
+    public boolean tormaa(Sukellusvene vene){
+        int vx = vene.getX(); int vy = vene.getY();
+        boolean a = (vx < x&&x < vene.getOikeaReuna() ) || (x < vx&&vx < x+width);
+        boolean b = (vy <y&&y < vene.getAlareuna() ) || (y < vy&&vy < y + height);
+        return a && b;
+    }
+    
+    public boolean tormaa(Aarre aarre){
+        int ax = aarre.getX(); int ay = aarre.getY(); int r = aarre.getSade();
+        boolean a = x-r < ax && ax < x+width+r;
+        boolean b = y-r < ay && ay < y+width+r;
+        return a && b;
+    }
+    
     public void piirra(Graphics g){
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);

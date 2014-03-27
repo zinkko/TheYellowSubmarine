@@ -59,33 +59,23 @@ public class SukellusveneTest {
     
     @Test
     public void hengissaMetodiToimii1(){
-        vene.liiku();
-        vene.liiku();
+        vene.kulutaHappi();
+        vene.kulutaHappi();
         assertTrue(vene.hengissa());
     }
     
     @Test
     public void hengissaMetodiToimii2(){
-        for (int i=0;i<6;i++) vene.liiku();
+        for (int i=0;i<6;i++) vene.kulutaHappi();
         assertFalse(vene.hengissa());
     }
     
     @Test
-    public void alussaVeneEiLiiku(){
+    public void alussaVeneenNopeusNolla(){
         vene.liiku();
         vene.liiku();
         assertEquals(vene.getX(),alkuX);
         assertEquals(vene.getY(),alkuY);
-    }
-    
-    @Test
-    public void veneLiikkuuNopeudenMukaan(){
-        int nx = 2; int ny = 3;
-        vene.setNopeus(nx, ny);
-        vene.liiku();
-        vene.liiku();
-        assertEquals(vene.getX(), alkuX + 2*nx);
-        assertEquals(vene.getY(), alkuY + 2*ny);
     }
     
     @Test
