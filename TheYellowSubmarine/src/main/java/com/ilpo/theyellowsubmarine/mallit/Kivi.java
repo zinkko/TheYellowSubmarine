@@ -32,8 +32,8 @@ public class Kivi {
     
     public boolean tormaa(Aarre aarre){
         int ax = aarre.getX(); int ay = aarre.getY(); int r = aarre.getSade();
-        boolean a = x-r < ax && ax < x+width+r;
-        boolean b = y-r < ay && ay < y+width+r;
+        boolean a = x-r <= ax && ax <= x+width+r;
+        boolean b = y-r <= ay && ay <= y+width+r;
         return a && b;
     }
     

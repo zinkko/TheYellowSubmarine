@@ -22,19 +22,23 @@ public class Kartta {
     private int alkuX, alkuY;
     private Random random;
     
-    public Kartta(int leveys, int korkeus, int aarteidenMaara){
+    public Kartta(int leveys, int korkeus, int aarteidenMaara, int kivienMaara){
         this.aarteet = new LinkedList<>();
         this.kivet = new LinkedList<>();
         this.random = new Random();
         this.korkeus = korkeus;
         this.leveys = leveys;
-        this.generoiKivet();
+        this.generoiKivet(kivienMaara);
         this.generoiAarteet(aarteidenMaara);
     }
     
-    private void generoiKivet(){
+    public Kartta(int leveys, int korkeus, int aarteidenMaara){
+        this(leveys,korkeus,aarteidenMaara,0);
+    }
+    
+    private void generoiKivet(int maara){
         int x,y;
-        for (int i=1;i<4;i++){
+        for (int i=0;i<maara;i++){
             x = random.nextInt(50) + i*100;
             y = random.nextInt(300) + 50;
             generoiKivi(x,y);

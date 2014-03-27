@@ -6,6 +6,9 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
+import com.ilpo.theyellowsubmarine.Sovellus;
+import com.ilpo.theyellowsubmarine.mallit.Kartta;
+import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +21,10 @@ import static org.junit.Assert.*;
  * @author ilari
  */
 public class PeliLogiikkaTest {
+    
+    private Pelilogiikka logiikka;
+    private Sukellusvene vene;
+    private Kartta kartta;
     
     public PeliLogiikkaTest() {
     }
@@ -32,6 +39,9 @@ public class PeliLogiikkaTest {
     
     @Before
     public void setUp() {
+        this.kartta=  new Kartta(10,10,0);
+        this.vene= new Sukellusvene(5,5,1);
+        logiikka = new Pelilogiikka(new Sovellus(), kartta,vene);
     }
     
     @After
@@ -46,6 +56,27 @@ public class PeliLogiikkaTest {
     
     @Test
     public void pelaajaPysyyKartalla(){
-        
+        vene.kiihdyta(-10, -10);
+        vene.liiku();
+        vene.liiku();
+        logiikka.teeJtn();
+        oletaPaikka(0,0);
+
+    }
+    
+    @Test
+    public void pelaajaPysyyKartalla2(){
+        vene.kiihdyta(10, 10);
+        vene.liiku();
+        vene.liiku();
+        logiikka.teeJtn();
+        oletaPaikka(10,10);
+    }
+    
+    
+    
+    private void oletaPaikka(int x, int y){
+        assertEquals(x, vene.getX());
+        assertEquals(y, vene.getY()); 
     }
 }

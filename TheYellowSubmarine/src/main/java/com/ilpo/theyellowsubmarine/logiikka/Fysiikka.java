@@ -14,7 +14,7 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
  */
 public class Fysiikka {
     
-    private static final int AIKA_YKSIKKO = 10;
+    public static final int AIKA_YKSIKKO = 10;
     
     private final Sukellusvene vene;
     private int tickX, tickY;
