@@ -24,9 +24,9 @@ public class Kivi {
     }
     
     public boolean tormaa(Sukellusvene vene){
-        int vx = vene.getX(); int vy = vene.getY();
-        boolean a = (vx <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+width);
-        boolean b = (vy <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + height);
+        int vx = vene.getVasenReuna(); int vy = vene.getYlareuna();
+        boolean a = (vene.getVasenReuna() <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+width);
+        boolean b = (vene.getYlareuna() <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + height);
         return a && b;
     }
     
@@ -41,4 +41,26 @@ public class Kivi {
         g.setColor(Color.GRAY);
         g.fillRect(x, y, width, height);
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    public int getOikeaReuna(){
+        return x + width;
+    }
+    
+    
 }

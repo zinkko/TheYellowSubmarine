@@ -37,19 +37,15 @@ public class Kartta {
     }
     
     private void generoiKivet(int maara){
-        int x,y;
-        for (int i=0;i<maara;i++){
-            x = random.nextInt(50) + i*100;
-            y = random.nextInt(300) + 50;
-            generoiKivi(x,y);
+        if (maara==0){
+            return;
         }
-    }
-    
-    private void generoiKivi(int x, int y){
-        int lev = random.nextInt(20)+30;
-        int kork = random.nextInt(20)+30;
-        Kivi kivi = new Kivi(x,y,lev,kork);
-        this.kivet.add(kivi);
+        Kivi kivi1 = new Kivi(leveys/4,korkeus/3,leveys/2,korkeus/4);
+        Kivi kivi2 = new Kivi(leveys/10,korkeus/3*2,leveys/3,korkeus/4);
+        Kivi kivi3 = new Kivi(leveys/2+leveys/8,korkeus/3*2,leveys/3,korkeus/4);
+        this.kivet.add(kivi1);
+        kivet.add(kivi2);
+        kivet.add(kivi3);
     }
     
     private void generoiAarteet(int maara){
@@ -88,6 +84,10 @@ public class Kartta {
 
     public LinkedList<Aarre> getAarteet() {
         return aarteet;
+    }
+    
+    public LinkedList<Kivi> getKivet(){
+        return kivet;
     }
     
 }

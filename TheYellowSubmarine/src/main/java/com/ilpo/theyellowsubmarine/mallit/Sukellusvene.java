@@ -35,18 +35,51 @@ public class Sukellusvene {
         if (happitaso>0) happitaso--;
     }
     
+    public void siirra(int[] paikka){
+        this.x = paikka[0];
+        this.y = paikka[1];
+    }
+    
     public void kulutaHappi(){
         if (happitaso>0) happitaso--;
     }
     
-    public void liikuVaakatasossa(){
-        if (this.nopeusX>0) this.x++;
-        else this.x --;
+    public void liikuVaakatasossa(boolean eteen){
+        int lisays;
+        if (eteen) {
+            lisays=1;
+        }else{
+            lisays = -1;
+        }
+        if (this.nopeusX>0){
+            this.x+=lisays;
+        }
+        else{
+            this.x-=lisays;
+        }
     }
     
-    public void liikuPystytasossa(){
-        if (this.nopeusY>0) this.y++;
-        else this.y--;
+    public void liikuPystytasossa(boolean eteen){
+        int lisays;
+        if (eteen) {
+            lisays=1;
+        }else{
+            lisays = -1;
+        }
+        if (this.nopeusY>0){
+            this.y+=lisays;
+        }
+        else{
+            this.y-=lisays;
+        }
+    }
+    
+    public void pysahdyX(){
+        nopeusX=0;
+    }
+    
+    public void pysahdyY(){
+        nopeusY=0;
     }
     
     public void kiihdyta(int accX, int accY) {
@@ -96,11 +129,19 @@ public class Sukellusvene {
     }
     
     public int getOikeaReuna(){
-        return x + this.leveys;
+        return x + this.leveys/2;
+    }
+    
+    public int getVasenReuna(){
+        return x - this.leveys/2;
     }
     
     public int getAlareuna(){
-        return y + this.korkeus;
+        return y + this.korkeus/2;
+    }
+    
+    public int getYlareuna(){
+        return y - this.korkeus/2;
     }
 
     public int getHappiTaso() {

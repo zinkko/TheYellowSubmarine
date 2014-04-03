@@ -9,6 +9,7 @@ package com.ilpo.theyellowsubmarine.logiikka;
 import com.ilpo.theyellowsubmarine.Sovellus;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
+import com.ilpo.theyellowsubmarine.mallit.Kivi;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -54,6 +55,7 @@ public class Pelilogiikka implements Runnable{
         this.fysiikka.seuraava();
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
+        this.tarkistaKivet();
         return vene.hengissa();
     }
     /**
@@ -95,6 +97,21 @@ public class Pelilogiikka implements Runnable{
             if (aarre.voidaanKerata(vene)){
                 this.pelaajanRahat += aarre.getArvo();
                 aarteet.remove();
+            }
+        }
+    }
+    
+    private void tarkistaKivet(){
+        for (Kivi kivi: kartta.getKivet()){
+            if (kivi.tormaa(vene)){
+                vene.liikuVaakatasossa(false); // arvaus
+                if (kivi.tormaa(vene)){
+                    vene.liikuVaakatasossa(true); // ei auttanut :(
+                    vene.liikuPystytasossa(false);
+                    vene.pysahdyY();
+                }else{
+                    vene.pysahdyX();
+                }
             }
         }
     }

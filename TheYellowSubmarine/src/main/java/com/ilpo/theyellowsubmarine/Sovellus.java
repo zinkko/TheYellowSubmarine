@@ -17,7 +17,7 @@ public class Sovellus{
     private final Pelilogiikka logiikka;
     
     public Sovellus() {
-        Kartta k = new Kartta(500,500,10);
+        Kartta k = new Kartta(500,500,10,1);
         Sukellusvene v = new Sukellusvene(100,100,10000);
         
         logiikka = new Pelilogiikka(this,k,v);

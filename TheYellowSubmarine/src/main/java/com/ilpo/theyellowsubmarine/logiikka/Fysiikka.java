@@ -36,7 +36,7 @@ public class Fysiikka {
         if (rajaX == -1) return; // nopeus == 0, turha tehdä mtn
         tickX++;
         if (tickX >= rajaX) {
-            vene.liikuVaakatasossa();
+            vene.liikuVaakatasossa(true);
             tickX = 0;
         }
         
@@ -46,7 +46,7 @@ public class Fysiikka {
         if (rajaY == -1) return; // nopeus == 0
         tickY++;
         if (tickY >= rajaY){
-            vene.liikuPystytasossa();
+            vene.liikuPystytasossa(true);
             tickY = 0;
         }
     }
