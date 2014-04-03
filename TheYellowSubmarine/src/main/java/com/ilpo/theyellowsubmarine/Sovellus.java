@@ -8,8 +8,8 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import javax.swing.SwingUtilities;
 
 /**
- * Hello world!
- *
+ * Sovelluksen pääluokka.
+ * @author ilari
  */
 public class Sovellus{
     private final Kayttoliittyma kayttoliittyma;
@@ -32,7 +32,7 @@ public class Sovellus{
     }
     
     public void move(int direction){
-        this.logiikka.move(direction);
+        this.logiikka.liiku(direction);
     }
     
     public void maalaa(){

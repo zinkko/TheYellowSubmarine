@@ -12,7 +12,8 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- *
+ * Piirrä peliin liittyvät komponentit.
+ * 
  * @author ilari
  */
 public class Piirtaja extends JPanel{

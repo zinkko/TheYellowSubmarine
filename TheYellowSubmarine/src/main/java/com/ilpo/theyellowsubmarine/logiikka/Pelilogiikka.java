@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Pelin toimintaa ohjaava luokka.
  * @author ilari
  */
 public class Pelilogiikka implements Runnable{
@@ -26,6 +26,12 @@ public class Pelilogiikka implements Runnable{
     private final Sovellus app;
     private final Fysiikka fysiikka;
     
+    /**
+     * 
+     * @param app sovellus joka pöyrittää peliä
+     * @param kartta kartta jolla pelataan
+     * @param vene pelaajan vene
+     */
     public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
@@ -33,6 +39,9 @@ public class Pelilogiikka implements Runnable{
         this.fysiikka = new Fysiikka(vene);
     }
     
+    /**
+     * pelin "kello"
+     */
     @Override
     public void run(){
         while (true){
@@ -47,7 +56,8 @@ public class Pelilogiikka implements Runnable{
     }
     
     /**
-     * 
+     * logiikan toiminnan päämetodi. Run kutsuu tätä tasaisesti
+     * (public koska testit :D)
      * @return false jos peli on ohi.
      */
     public boolean suorita(){ // TODO: rename this
@@ -63,7 +73,7 @@ public class Pelilogiikka implements Runnable{
      * k.o. suuntaan
      * @param direction suunta johon sukellusvene lähtee kiihdyttämään 
      */
-    public void move(int direction){ 
+    public void liiku(int direction){ 
         int dx = 0;
         int dy = 0;
         switch (direction){

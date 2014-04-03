@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
  */
 public class AarreTest {
     
+    private Sukellusvene vene;
+    
     public AarreTest() {
     }
     
@@ -32,6 +34,7 @@ public class AarreTest {
     
     @Before
     public void setUp() {
+        this.vene = new Sukellusvene(10,10,0);
     }
     
     @After
@@ -45,9 +48,19 @@ public class AarreTest {
     // public void hello() {}
     
     @Test
-    public void keraysToimii(){
-        
+    public void keraysToimiiKunVoidaanKerata(){
+        Aarre a = new Aarre(5,5,5);
+        assertTrue(a.voidaanKerata(vene));
     }
     
+    @Test
+    public void keraysToimiiKunEiVoiKerata(){
+        Aarre aarre = new Aarre(50,50,50);
+        assertFalse(aarre.voidaanKerata(vene));
+    }
     
+    @Test
+    public void rajallaToimii(){
+        Aarre a = new Aarre(10,vene.getAlareuna()+5,5);
+    }
 }

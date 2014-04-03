@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Kuuntelee pelaajan syötteitä kun ohjaa sukellusvenettä.
+ * Kuuntelee pelaajan syötteitä kun hän ohjaa sukellusvenettä.
  * 
  * @author ilari
  */

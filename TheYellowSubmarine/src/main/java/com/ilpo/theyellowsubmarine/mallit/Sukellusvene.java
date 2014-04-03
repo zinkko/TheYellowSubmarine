@@ -188,4 +188,14 @@ public class Sukellusvene {
     public int getNopeusY(){
         return nopeusY;
     }
+    
+    /**
+     * HUOM! vain testeille
+     * @param x
+     * @param y
+     */
+    public void aseta(int x, int y){
+        this.x=x;
+        this.y = y;
+    }
 }

@@ -42,6 +42,12 @@ public class Kartta {
     public Kartta(int leveys, int korkeus, int aarteidenMaara){
         this(leveys,korkeus,aarteidenMaara,0);
     }
+    /**
+     * HUOM! vain testeille
+     */
+    public void lisaaKivi(Kivi kivi){
+        this.kivet.add(kivi);
+    }
     
     private void generoiKivet(int maara){
         if (maara==0){

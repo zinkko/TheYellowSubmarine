@@ -56,7 +56,7 @@ public class KiviTest {
     
     @Test
     public void tormaaOikeinJosVeneEiTormaa(){
-        Sukellusvene vene = new Sukellusvene(8,70,1);
+        Sukellusvene vene = new Sukellusvene(-15,70,1);
         assertFalse(kivi.tormaa(vene));
     }
     

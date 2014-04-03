@@ -22,3 +22,7 @@ tunti logiikan koodausta, testeille rungot
 ====
 tunti logiikan koodausta.
 
+3.4
+===
+2h + 2h koodausta
+ens viikolla alotan sit aikaisemmin :D
