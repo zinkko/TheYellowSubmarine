@@ -37,7 +37,7 @@ public class Pelilogiikka implements Runnable{
     public void run(){
         while (true){
             try {
-                teeJtn();
+                suorita();
                 app.maalaa();
                 Thread.sleep(20);
             } catch (InterruptedException ex) {
@@ -50,7 +50,7 @@ public class Pelilogiikka implements Runnable{
      * 
      * @return false jos peli on ohi.
      */
-    public boolean teeJtn(){ // TODO: rename this
+    public boolean suorita(){ // TODO: rename this
         //vene.liiku();
         this.fysiikka.seuraava();
         this.pidaPelaajaKartalla();
@@ -59,7 +59,8 @@ public class Pelilogiikka implements Runnable{
         return vene.hengissa();
     }
     /**
-     * 
+     * muuttaa veneen liikettä. metodin kutsu muuttaa veneen nopeutta yhdellä
+     * k.o. suuntaan
      * @param direction suunta johon sukellusvene lähtee kiihdyttämään 
      */
     public void move(int direction){ 
@@ -82,6 +83,9 @@ public class Pelilogiikka implements Runnable{
         vene.kiihdyta(dx, dy);
     }
     
+    /**
+     * Pidä pelaaja kartalla
+     */
     private void pidaPelaajaKartalla(){
         if (vene.getX()<0) vene.setX(0);
         if (vene.getY()<0) vene.setY(0);
@@ -89,6 +93,9 @@ public class Pelilogiikka implements Runnable{
         if (vene.getY()> kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
     }
     
+    /**
+     * kerää aarteet jotka ovat tarpeeksi lähellä
+     */
     private void tarkistaAarteet(){
         Iterator<Aarre> aarteet = kartta.getAarteet().iterator();
         Aarre aarre;
@@ -101,6 +108,9 @@ public class Pelilogiikka implements Runnable{
         }
     }
     
+    /**
+     * tarkista ettei pelaaja kulje kivien läpi
+     */
     private void tarkistaKivet(){
         for (Kivi kivi: kartta.getKivet()){
             if (kivi.tormaa(vene)){
@@ -114,6 +124,10 @@ public class Pelilogiikka implements Runnable{
                 }
             }
         }
+    }
+    
+    public int getPelaajanRahat(){
+        return this.pelaajanRahat;
     }
     
 }

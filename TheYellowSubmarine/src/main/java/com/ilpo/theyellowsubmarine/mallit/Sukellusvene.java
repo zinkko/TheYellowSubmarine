@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ * pelaajan sukellusveneen toimintaa, lähinnä liikkumista kuvaava malli
+ * x ja y ovat keskipisteen koordinaatteja.
+ * 
  * @author ilari
  */
 public class Sukellusvene {
@@ -19,6 +21,13 @@ public class Sukellusvene {
     private int nopeusX, nopeusY; // pts/aikayksikkö
     private int maxNopeus = 10;
 
+    /**
+     * pääkonstruktori
+     * 
+     * @param x veneen paikka alussa
+     * @param y veneen paikka lopussa
+     * @param happiTaso hapen määrä veneellä (tähän tosi iso luku...)
+     */
     public Sukellusvene(int x, int y, int happiTaso) {
         this.x = x;
         this.y = y;
@@ -27,6 +36,8 @@ public class Sukellusvene {
         this.happitaso = happiTaso;
     }
     /**
+     * testit käyttää tätä vielä...
+     * 
      * @deprecated 
      */
     public void liiku() {
@@ -35,15 +46,19 @@ public class Sukellusvene {
         if (happitaso>0) happitaso--;
     }
     
-    public void siirra(int[] paikka){
-        this.x = paikka[0];
-        this.y = paikka[1];
-    }
-    
+    /**
+     * pienennä veneen happimäärää yhdellä
+     */
     public void kulutaHappi(){
         if (happitaso>0) happitaso--;
     }
     
+    /**
+     * liikuttaa venettä vaakasuunnassa yhden yksikön eteen tai taakse sen suunnan
+     * perusteella
+     * 
+     * @param eteen, liikutetaanko eteen vai taakse 
+     */
     public void liikuVaakatasossa(boolean eteen){
         int lisays;
         if (eteen) {
@@ -59,6 +74,12 @@ public class Sukellusvene {
         }
     }
     
+    /**
+     * liikuttaa venettä pystysuunnassa yhden yksikön eteen tai taakse sen suunnan
+     * perusteella
+     * 
+     * @param eteen, liikutetaanko eteen vai taakse
+     */
     public void liikuPystytasossa(boolean eteen){
         int lisays;
         if (eteen) {
@@ -74,14 +95,26 @@ public class Sukellusvene {
         }
     }
     
+    /**
+     * pysäytä vaakasuuntainen liike
+     */
     public void pysahdyX(){
         nopeusX=0;
     }
     
+    /**
+     * pysäytä pystysuuntainen liike
+     */
     public void pysahdyY(){
         nopeusY=0;
     }
     
+    /**
+     * muuta veneen nopeutta
+     * 
+     * @param accX x-suunnan kiihtyvyys
+     * @param accY y-suunnan kiihtysyys
+     */
     public void kiihdyta(int accX, int accY) {
         this.nopeusX += accX;
         this.nopeusY += accY;

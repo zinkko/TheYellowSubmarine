@@ -7,7 +7,7 @@
 package com.ilpo.theyellowsubmarine.logiikka;
 
 /**
- *
+ * Ei vielä implementoitu. Tänne sovelluksen logiikka, esim. menu
  * @author ilari
  */
 public class Sovelluslogiikka {

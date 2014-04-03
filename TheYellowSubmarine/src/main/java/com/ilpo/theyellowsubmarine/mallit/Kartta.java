@@ -12,7 +12,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- *
+ * Pelikenttä
+ * 
  * @author ilari
  */
 public class Kartta {
@@ -22,6 +23,9 @@ public class Kartta {
     private int alkuX, alkuY;
     private Random random;
     
+    /**
+     * pääkonstruktori
+     */
     public Kartta(int leveys, int korkeus, int aarteidenMaara, int kivienMaara){
         this.aarteet = new LinkedList<>();
         this.kivet = new LinkedList<>();
@@ -32,6 +36,9 @@ public class Kartta {
         this.generoiAarteet(aarteidenMaara);
     }
     
+    /**
+     * Luo kartta ilman kiviä, testeille lähinnä
+     */
     public Kartta(int leveys, int korkeus, int aarteidenMaara){
         this(leveys,korkeus,aarteidenMaara,0);
     }
@@ -62,6 +69,10 @@ public class Kartta {
         return korkeus;
     }
     
+    /**
+     * luo yksi aarre satunnaiseen paikkaan
+     * @param arvo kuinka monta "kolikkoa" pelaaja saa
+     */
     private void generoiAarre(int arvo){
         int x = random.nextInt(leveys-10)+5;
         int y = random.nextInt(korkeus-10)+5;

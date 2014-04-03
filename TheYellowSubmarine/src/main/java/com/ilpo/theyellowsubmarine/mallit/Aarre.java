@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ * Aarretta kuvaava malli. x ja y ovat keskipisteen koordinaatit
  * @author ilari
  */
 public class Aarre {
@@ -24,6 +24,10 @@ public class Aarre {
         return y;
     }
 
+    /**
+     * ei sade vaan säde :P
+     * @return aarteen säde
+     */
     public int getSade() {
         return sade;
     }
@@ -38,7 +42,9 @@ public class Aarre {
     
     /**
      * 
-     * @param vene
+     * törmäystarkistus, onko sukellusvene tarpeeksi lähellä kerätäkseen tämän aarteen?
+     * 
+     * @param vene vene johon verrataan
      * @return true joss sukellusvene on tarpeeksi lähellä kerätäkseen aarteen
      */
     public boolean voidaanKerata(Sukellusvene vene){

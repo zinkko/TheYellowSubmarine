@@ -10,36 +10,58 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ * Kivi jonka läpi pelaaja ei pääse
+ * 
  * @author ilari
  */
 public class Kivi {
-    int x,y,width,height;
+    int x,y,leveys,korkeus;
     
-    public Kivi(int x, int y, int width, int height){
+    /**
+     * 
+     * @param x kiven paikka (nurkka)
+     * @param y kiven paikka (nurkka)
+     * @param leveys
+     * @param korkeus 
+     */
+    
+    public Kivi(int x, int y, int leveys, int korkeus){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.leveys = leveys;
+        this.korkeus = korkeus;
     }
     
+    /**
+     * törmäystarkistus
+     * 
+     * @param vene, vene jota tarkastellaan
+     * @return true, jos ja vain jos vene ja kivi tormäävät
+     */
     public boolean tormaa(Sukellusvene vene){
         int vx = vene.getVasenReuna(); int vy = vene.getYlareuna();
-        boolean a = (vene.getVasenReuna() <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+width);
-        boolean b = (vene.getYlareuna() <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + height);
+        boolean a = (vene.getVasenReuna() <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+leveys);
+        boolean b = (vene.getYlareuna() <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + korkeus);
         return a && b;
     }
     
+    /**
+     * 
+     * törmäystarkistus
+     * 
+     * @param aarre aarre jota tarkastellaan
+     * @return true jos ja vain jos aarre ja ovat liian lähellä toisiaan
+     */
     public boolean tormaa(Aarre aarre){
         int ax = aarre.getX(); int ay = aarre.getY(); int r = aarre.getSade();
-        boolean a = x-r <= ax && ax <= x+width+r;
-        boolean b = y-r <= ay && ay <= y+width+r;
+        boolean a = x-r <= ax && ax <= x+leveys+r;
+        boolean b = y-r <= ay && ay <= y+leveys+r;
         return a && b;
     }
     
     public void piirra(Graphics g){
         g.setColor(Color.GRAY);
-        g.fillRect(x, y, width, height);
+        g.fillRect(x, y, leveys, korkeus);
     }
 
     public int getX() {
@@ -51,15 +73,15 @@ public class Kivi {
     }
 
     public int getWidth() {
-        return width;
+        return leveys;
     }
 
     public int getHeight() {
-        return height;
+        return korkeus;
     }
     
     public int getOikeaReuna(){
-        return x + width;
+        return x + leveys;
     }
     
     
