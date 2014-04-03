@@ -69,7 +69,7 @@ public class PeliLogiikkaTest {
         vene.kiihdyta(10, 10);
         vene.liiku();
         vene.liiku();
-        logiikkasuoritan();
+        logiikka.suorita();
         oletaPaikka(10,10);
     }
     
