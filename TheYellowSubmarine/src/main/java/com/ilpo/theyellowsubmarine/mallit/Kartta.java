@@ -21,6 +21,7 @@ public class Kartta {
     private final LinkedList<Kivi> kivet; // ts. esteet kartalla
     private int leveys, korkeus;
     private int alkuX, alkuY;
+    private final int pinta = 15;
     private Random random;
     
     /**
@@ -89,7 +90,8 @@ public class Kartta {
     public void piirra(Graphics g){
         g.setColor(new Color(120,155,255));
         g.fillRect(0, 0, leveys, korkeus);
-        
+        g.setColor(Color.BLUE);
+        g.fillRect(0, 0, leveys, pinta);
         for (Aarre a:this.aarteet){
             a.piirra(g);
         }
@@ -105,6 +107,10 @@ public class Kartta {
     
     public LinkedList<Kivi> getKivet(){
         return kivet;
+    }
+    
+    public int getPinta(){
+        return this.pinta;
     }
     
 }

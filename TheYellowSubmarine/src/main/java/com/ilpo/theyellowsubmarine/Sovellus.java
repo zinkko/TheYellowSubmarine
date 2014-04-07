@@ -35,6 +35,10 @@ public class Sovellus{
         this.logiikka.liiku(direction);
     }
     
+    public void havio(){
+        this.kayttoliittyma.vaihda(false);
+    }
+    
     public void maalaa(){
         this.kayttoliittyma.maalaa();
     }

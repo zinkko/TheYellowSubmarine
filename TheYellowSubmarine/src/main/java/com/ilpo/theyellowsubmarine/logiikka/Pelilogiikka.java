@@ -44,10 +44,17 @@ public class Pelilogiikka implements Runnable{
      */
     @Override
     public void run(){
+        boolean peliJatkuu;
         while (true){
             try {
-                suorita();
+                peliJatkuu = suorita();
                 app.maalaa();
+                
+                if (!peliJatkuu){
+                    app.havio();
+                    break;
+                }
+                
                 Thread.sleep(20);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,6 +73,9 @@ public class Pelilogiikka implements Runnable{
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         this.tarkistaKivet();
+        if (vene.getY()>kartta.getPinta()){
+            vene.kulutaHappi();
+        }
         return vene.hengissa();
     }
     /**
@@ -97,10 +107,23 @@ public class Pelilogiikka implements Runnable{
      * Pidä pelaaja kartalla
      */
     private void pidaPelaajaKartalla(){
-        if (vene.getX()<0) vene.setX(0);
-        if (vene.getY()<0) vene.setY(0);
-        if (vene.getX() > kartta.getLeveys()) vene.setX(kartta.getLeveys());
-        if (vene.getY()> kartta.getKorkeus()) vene.setY(kartta.getKorkeus());
+        
+        if (vene.getX()<0){
+            vene.setX(0);
+            vene.pysahdyX();
+        }
+        if (vene.getX() > kartta.getLeveys()){
+            vene.setX(kartta.getLeveys());
+            vene.pysahdyX();
+        }
+        if (vene.getY()<kartta.getPinta()){
+            vene.setY(kartta.getPinta());
+            vene.pysahdyY();
+        } 
+        if (vene.getY()> kartta.getKorkeus()){
+            vene.setY(kartta.getKorkeus());
+            vene.pysahdyY();
+        }
     }
     
     /**

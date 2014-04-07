@@ -9,9 +9,15 @@ package com.ilpo.theyellowsubmarine.kayttoliittyma;
 import com.ilpo.theyellowsubmarine.Sovellus;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
@@ -21,25 +27,27 @@ import javax.swing.WindowConstants;
 public class Kayttoliittyma implements Runnable{
     
     private final JFrame frame;
-    private Piirtaja piirtaja;
-    private Sovellus app;
+    private final Piirtaja piirtaja;
+    private final Sovellus app;
+    private JPanel cards;
+    private static final String MENU = "menu";
+    private static final String PELI = "game";
+    private Thread peliSaie;
     
     public Kayttoliittyma(Sovellus app, Kartta k, Sukellusvene v){
         this.app = app;
         this.frame = new JFrame();
         this.piirtaja = new Piirtaja(k,v);
+        this.peliSaie = new Thread(app.getLogiikka());
+        peliSaie.setDaemon(true);
     }
     
     @Override
     public void run(){
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(500,500));
-        
-        Thread t = new Thread(app.getLogiikka());
-        
+
         luoKomponentit(frame.getContentPane());
-        
-        t.start();
         
         frame.pack();
         frame.setVisible(true);
@@ -51,9 +59,44 @@ public class Kayttoliittyma implements Runnable{
     }
     
     private void luoKomponentit(Container c){
-        c.add(this.piirtaja);
-        this.piirtaja.addKeyListener(new PeliKuuntelija(this));
-        this.piirtaja.setFocusable(true);
+        // menun näkymä
+        JPanel menu = teeMenu();
+        
+        this.frame.addKeyListener(new PeliKuuntelija(this));
+        this.frame.setFocusable(true);
+        
+        //kortit
+        this.cards = new JPanel(new CardLayout());
+        cards.add(this.piirtaja,PELI);
+        cards.add(menu, MENU);
+        
+        c.add(this.cards);
+        ((CardLayout) cards.getLayout()).show(cards, MENU);
+    }
+    
+    private JPanel teeMenu(){
+        JPanel menu = new JPanel(new GridLayout(2,1));
+        JTextField nimi  = new JTextField("The Yellow Submarine!");
+        nimi.setEditable(false);
+        nimi.setFont(new Font("Sans-Serif",Font.BOLD, 24));
+        JButton alku = new JButton("aloita!");
+        alku.addActionListener(new SovellusKuuntelija(this, alku));
+        menu.add(nimi);
+        menu.add(alku);
+        
+        return menu;
+    }
+    
+    public void vaihda(boolean peli){
+        if (peli){
+            ((CardLayout) cards.getLayout()).show(cards, PELI);
+            if (!peliSaie.isAlive()){
+                this.peliSaie.start();
+            }
+        }else{
+            ((CardLayout) cards.getLayout()).show(cards, MENU);
+            this.peliSaie.interrupt();
+        }
     }
     
     public void move(int direction){

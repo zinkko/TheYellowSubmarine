@@ -16,7 +16,8 @@ import java.awt.Graphics;
  */
 public class Sukellusvene {
 
-    private int x, y, leveys, korkeus;
+    private int x, y;
+    private final int leveys, korkeus;
     private int happitaso; // jos happi loppuu, käy huonosti
     private int nopeusX, nopeusY; // pts/aikayksikkö
     private int maxNopeus = 10;
@@ -50,7 +51,10 @@ public class Sukellusvene {
      * pienennä veneen happimäärää yhdellä
      */
     public void kulutaHappi(){
-        if (happitaso>0) happitaso--;
+        if (happitaso>0){
+            happitaso--;
+        }
+        System.out.println(happitaso);
     }
     
     /**
@@ -192,7 +196,6 @@ public class Sukellusvene {
     /**
      * HUOM! vain testeille
      * @param x
-     * @param y
      */
     public void aseta(int x, int y){
         this.x=x;
