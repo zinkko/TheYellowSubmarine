@@ -20,7 +20,8 @@ public class Sukellusvene {
     private final int leveys, korkeus;
     private int happitaso; // jos happi loppuu, käy huonosti
     private int nopeusX, nopeusY; // pts/aikayksikkö
-    private int maxNopeus = 10;
+    private final int maxNopeus = 10;
+    private int rahat;
 
     /**
      * pääkonstruktori
@@ -34,6 +35,7 @@ public class Sukellusvene {
         this.y = y;
         this.leveys = 40;
         this.korkeus = 20;
+        this.rahat = 0;
         this.happitaso = happiTaso;
     }
     /**
@@ -191,6 +193,14 @@ public class Sukellusvene {
     
     public int getNopeusY(){
         return nopeusY;
+    }
+    
+    public int getRahat(){
+        return rahat;
+    }
+    
+    public void lisaaRahaa(int raha){
+        this.rahat += raha;
     }
     
     /**

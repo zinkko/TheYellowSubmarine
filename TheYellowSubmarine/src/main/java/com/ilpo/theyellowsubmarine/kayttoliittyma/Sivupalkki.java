@@ -7,6 +7,7 @@
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -55,9 +56,10 @@ public class Sivupalkki{
     }
     
     private void piirraRahat(Graphics g, int rahat){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.YELLOW.darker());
+        g.setFont(new Font("Consolas", Font.BOLD, 24));
         char[] merkit = (""+rahat).toCharArray();
-        g.drawChars(merkit, 0, merkit.length, x, x);
+        g.drawChars(merkit, 0, merkit.length, x + leveys/4, y + korkeus*3/4);
     }
     
     

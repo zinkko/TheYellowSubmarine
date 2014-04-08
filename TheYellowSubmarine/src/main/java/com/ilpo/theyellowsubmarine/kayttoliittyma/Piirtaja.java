@@ -46,7 +46,7 @@ public class Piirtaja extends JPanel{
         }
         if (vene != null){
             vene.piirra(g);
-            this.palken.piirra(g, vene.getHappiTaso(), -17);
+            this.palken.piirra(g, vene.getHappiTaso(), vene.getRahat());
         }
         
     }

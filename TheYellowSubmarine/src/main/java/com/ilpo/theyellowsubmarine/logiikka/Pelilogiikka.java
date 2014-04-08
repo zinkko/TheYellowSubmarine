@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 public class Pelilogiikka implements Runnable{
     private final Kartta kartta;
     private final Sukellusvene vene;
-    private int pelaajanRahat;
     private final Sovellus app;
     private final Fysiikka fysiikka;
     
@@ -33,7 +32,6 @@ public class Pelilogiikka implements Runnable{
      * @param vene pelaajan vene
      */
     public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
-        this.pelaajanRahat = 0;
         this.kartta = kartta;
         this.vene = vene;
         this.app = app;
@@ -139,7 +137,7 @@ public class Pelilogiikka implements Runnable{
         while (aarteet.hasNext()){
             aarre = aarteet.next();
             if (aarre.voidaanKerata(vene)){
-                this.pelaajanRahat += aarre.getArvo();
+                this.vene.lisaaRahaa(aarre.getArvo());
                 aarteet.remove();
             }
         }
@@ -164,7 +162,7 @@ public class Pelilogiikka implements Runnable{
     }
     
     public int getPelaajanRahat(){
-        return this.pelaajanRahat;
+        return this.vene.getRahat();
     }
 
     public Kartta getKartta() {
