@@ -20,6 +20,7 @@ public class Piirtaja extends JPanel{
     
     private Kartta kartta;
     private Sukellusvene vene;
+    private Sivupalkki palken;
     
     public Piirtaja(Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
@@ -27,7 +28,7 @@ public class Piirtaja extends JPanel{
     }
     
     public Piirtaja(){
-        
+        this.palken = new Sivupalkki(500, 0, 100,500, 3000); // poista taikaluvut
     }
 
     public void setKartta(Kartta kartta) {
@@ -45,6 +46,8 @@ public class Piirtaja extends JPanel{
         }
         if (vene != null){
             vene.piirra(g);
+            this.palken.piirra(g, vene.getHappiTaso(), -17);
         }
+        
     }
 }
