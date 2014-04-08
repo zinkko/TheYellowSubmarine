@@ -54,7 +54,7 @@ public class Sukellusvene {
         if (happitaso>0){
             happitaso--;
         }
-        System.out.println(happitaso);
+        //System.out.println(happitaso);
     }
     
     /**

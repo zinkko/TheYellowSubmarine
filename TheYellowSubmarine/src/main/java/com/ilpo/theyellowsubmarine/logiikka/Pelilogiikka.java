@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class Pelilogiikka implements Runnable{
     private final Kartta kartta;
     private final Sukellusvene vene;
-    private int pelaajanRahat = 0;
+    private int pelaajanRahat;
     private final Sovellus app;
     private final Fysiikka fysiikka;
     
@@ -33,10 +33,15 @@ public class Pelilogiikka implements Runnable{
      * @param vene pelaajan vene
      */
     public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
+        this.pelaajanRahat = 0;
         this.kartta = kartta;
         this.vene = vene;
         this.app = app;
         this.fysiikka = new Fysiikka(vene);
+    }
+    
+    public Pelilogiikka(Sovellus app){
+        this(app, new Kartta(500,500,10,1), new Sukellusvene(100,100,3000));
     }
     
     /**
@@ -49,7 +54,6 @@ public class Pelilogiikka implements Runnable{
             try {
                 peliJatkuu = suorita();
                 app.maalaa();
-                
                 if (!peliJatkuu){
                     app.havio();
                     break;
@@ -161,6 +165,14 @@ public class Pelilogiikka implements Runnable{
     
     public int getPelaajanRahat(){
         return this.pelaajanRahat;
+    }
+
+    public Kartta getKartta() {
+        return kartta;
+    }
+
+    public Sukellusvene getVene() {
+        return vene;
     }
     
 }

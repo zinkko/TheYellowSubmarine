@@ -13,10 +13,10 @@ import javax.swing.JPanel;
  *
  * @author ilari
  */
-public class PelaajanTiedot extends JPanel{
+public class Sivupalkki extends JPanel{
     
     
-    public PelaajanTiedot(){
+    public Sivupalkki(){
         super(); 
         
     }

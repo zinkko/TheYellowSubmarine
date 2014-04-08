@@ -26,9 +26,25 @@ public class Piirtaja extends JPanel{
         this.vene = vene;
     }
     
+    public Piirtaja(){
+        
+    }
+
+    public void setKartta(Kartta kartta) {
+        this.kartta = kartta;
+    }
+
+    public void setVene(Sukellusvene vene) {
+        this.vene = vene;
+    }
+    
     @Override
     protected void paintComponent(Graphics g){
-        kartta.piirra(g);
-        vene.piirra(g);
+        if (kartta != null) {
+            kartta.piirra(g);
+        }
+        if (vene != null){
+            vene.piirra(g);
+        }
     }
 }

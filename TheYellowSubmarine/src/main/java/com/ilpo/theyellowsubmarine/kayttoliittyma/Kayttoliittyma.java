@@ -32,16 +32,13 @@ public class Kayttoliittyma implements Runnable{
     private JPanel cards;
     private static final String MENU = "menu";
     private static final String PELI = "game";
-    private Thread peliSaie;
     
-    public Kayttoliittyma(Sovellus app, Kartta k, Sukellusvene v){
+    public Kayttoliittyma(Sovellus app){
         this.app = app;
         this.frame = new JFrame();
-        this.piirtaja = new Piirtaja(k,v);
-        this.peliSaie = new Thread(app.getLogiikka());
-        peliSaie.setDaemon(true);
+        this.piirtaja = new Piirtaja();
     }
-    
+        
     @Override
     public void run(){
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +77,7 @@ public class Kayttoliittyma implements Runnable{
         nimi.setEditable(false);
         nimi.setFont(new Font("Sans-Serif",Font.BOLD, 24));
         JButton alku = new JButton("aloita!");
-        alku.addActionListener(new SovellusKuuntelija(this, alku));
+        alku.addActionListener(new SovellusKuuntelija(app,this, alku));
         menu.add(nimi);
         menu.add(alku);
         
@@ -90,13 +87,14 @@ public class Kayttoliittyma implements Runnable{
     public void vaihda(boolean peli){
         if (peli){
             ((CardLayout) cards.getLayout()).show(cards, PELI);
-            if (!peliSaie.isAlive()){
-                this.peliSaie.start();
-            }
+            
         }else{
             ((CardLayout) cards.getLayout()).show(cards, MENU);
-            this.peliSaie.interrupt();
         }
+    }
+    
+    public Piirtaja getPiirtaja(){
+        return this.piirtaja;
     }
     
     public void move(int direction){
