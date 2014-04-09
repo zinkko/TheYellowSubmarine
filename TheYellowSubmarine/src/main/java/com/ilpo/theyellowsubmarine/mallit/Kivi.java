@@ -59,10 +59,6 @@ public class Kivi {
         return a && b;
     }
     
-    public void piirra(Graphics g){
-        g.setColor(Color.GRAY);
-        g.fillRect(x, y, leveys, korkeus);
-    }
 
     public int getX() {
         return x;
@@ -72,11 +68,11 @@ public class Kivi {
         return y;
     }
 
-    public int getWidth() {
+    public int getLeveys() {
         return leveys;
     }
 
-    public int getHeight() {
+    public int getKorkeus() {
         return korkeus;
     }
     

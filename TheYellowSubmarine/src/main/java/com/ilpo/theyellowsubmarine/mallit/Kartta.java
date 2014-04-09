@@ -87,20 +87,6 @@ public class Kartta {
         this.aarteet.add(uusiAarre);
     }
     
-    public void piirra(Graphics g){
-        g.setColor(new Color(120,155,255));
-        g.fillRect(0, 0, leveys, korkeus);
-        g.setColor(Color.BLUE);
-        g.fillRect(0, 0, leveys, pinta);
-        for (Aarre a:this.aarteet){
-            a.piirra(g);
-        }
-        
-        for (Kivi k:this.kivet){
-            k.piirra(g);
-        }
-    }
-
     public LinkedList<Aarre> getAarteet() {
         return aarteet;
     }

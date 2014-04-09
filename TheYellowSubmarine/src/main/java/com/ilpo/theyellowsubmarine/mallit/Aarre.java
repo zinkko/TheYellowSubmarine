@@ -59,8 +59,4 @@ public class Aarre {
         return arvo;
     }
     
-    public void piirra(Graphics g){
-        g.setColor(Color.GREEN);
-        g.fillOval(x-sade,y-sade, 2*sade, 2*sade);
-    }
 }

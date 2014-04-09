@@ -132,11 +132,6 @@ public class Sukellusvene {
     public boolean hengissa() {
         return this.happitaso > 0;
     }
-
-    public void piirra(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillOval(x - leveys/2, y - korkeus/2, leveys, korkeus);
-    }
     
     public void setNopeus(int x, int y){
         this.nopeusX = x;
