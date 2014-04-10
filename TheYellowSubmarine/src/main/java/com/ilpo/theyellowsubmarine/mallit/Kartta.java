@@ -6,8 +6,6 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.Random;
 

@@ -6,9 +6,6 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  * Aarretta kuvaava malli. x ja y ovat keskipisteen koordinaatit
  * @author ilari

@@ -26,3 +26,13 @@ tunti logiikan koodausta.
 ===
 2h + 2h koodausta
 ens viikolla alotan sit aikaisemmin :D
+
+8.4
+===
+3h koodausta, enimmäkseen käyttöliittymää
+
+10.4
+====
+3h refaktorointia
+2h testien kirjoitusta
+puoli tuntia uml-kaavioiden tekemistä
