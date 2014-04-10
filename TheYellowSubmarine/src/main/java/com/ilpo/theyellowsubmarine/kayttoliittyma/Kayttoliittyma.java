@@ -6,9 +6,8 @@
 
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
-import com.ilpo.theyellowsubmarine.Sovellus;
-import com.ilpo.theyellowsubmarine.mallit.Kartta;
-import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+import com.ilpo.theyellowsubmarine.logiikka.Pelilogiikka;
+import com.ilpo.theyellowsubmarine.logiikka.Sovelluslogiikka;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -28,21 +27,26 @@ public class Kayttoliittyma implements Runnable{
     
     private final JFrame frame;
     private final Piirtaja piirtaja;
-    private final Sovellus app;
     private JPanel cards;
+    private Pelilogiikka logiikka;
+    private Sovelluslogiikka sovlog;
     private static final String MENU = "menu";
     private static final String PELI = "game";
     
-    public Kayttoliittyma(Sovellus app){
-        this.app = app;
+    public Kayttoliittyma(){
         this.frame = new JFrame();
         this.piirtaja = new Piirtaja();
     }
         
     @Override
     public void run(){
+        if (logiikka==null) {
+            System.out.println("AARGH!");
+            return;
+        }
+        
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.frame.setPreferredSize(new Dimension(600,600));
+        this.frame.setPreferredSize(new Dimension(600,520));
 
         luoKomponentit(frame.getContentPane());
         
@@ -77,20 +81,20 @@ public class Kayttoliittyma implements Runnable{
         nimi.setEditable(false);
         nimi.setFont(new Font("Sans-Serif",Font.BOLD, 24));
         JButton alku = new JButton("aloita!");
-        alku.addActionListener(new SovellusKuuntelija(app,this, alku));
+        alku.addActionListener(new SovellusKuuntelija(this, alku));
         menu.add(nimi);
         menu.add(alku);
         
         return menu;
     }
     
-    public void vaihda(boolean peli){
-        if (peli){
-            ((CardLayout) cards.getLayout()).show(cards, PELI);
-            
-        }else{
-            ((CardLayout) cards.getLayout()).show(cards, MENU);
-        }
+    public void siirryPeliin(){
+        sovlog.aloitaPeli();
+        ((CardLayout) cards.getLayout()).show(cards, PELI);
+    }
+    
+    public void siirrySovellukseen(){
+        ((CardLayout) cards.getLayout()).show(cards, MENU);
     }
     
     public Piirtaja getPiirtaja(){
@@ -98,6 +102,14 @@ public class Kayttoliittyma implements Runnable{
     }
     
     public void move(int direction){
-        this.app.move(direction);
+        this.logiikka.liiku(direction);
+    }
+    
+    public void setLogiikka(Pelilogiikka logiikka){
+        this.logiikka = logiikka;
+    }
+    
+    public void setSovelluslogiikka(Sovelluslogiikka sovlog){
+        this.sovlog = sovlog;
     }
 }

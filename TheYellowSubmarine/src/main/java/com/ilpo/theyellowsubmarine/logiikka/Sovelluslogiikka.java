@@ -6,7 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
-import com.ilpo.theyellowsubmarine.Sovellus;
+import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 
@@ -15,15 +15,32 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
  * @author ilari
  */
 public class Sovelluslogiikka {
-    private final Sovellus app;
+    private final Kayttoliittyma kali;
+    private Thread peliSaie;
     
-    public Sovelluslogiikka(Sovellus app){
-        this.app = app;
+    public Sovelluslogiikka(Kayttoliittyma kali){
+        this.kali = kali;
+        Pelilogiikka peli = this.luoUusiPeli();
+        this.kali.setLogiikka(peli);
+    }
+       
+    public void lopetaPeli(){
+        if (peliSaie==null) return;
+        peliSaie.interrupt();
+        kali.siirrySovellukseen();
     }
     
-    public Pelilogiikka uusiPeli(){
+    public void aloitaPeli() {
+        Pelilogiikka logiikka = luoUusiPeli();
+        lopetaPeli(); // just in case
+        peliSaie = new Thread(logiikka);
+        peliSaie.setDaemon(true);
+        peliSaie.start();
+    }
+    
+    private Pelilogiikka luoUusiPeli(){
         Kartta k = new Kartta(500,500,20,1);
         Sukellusvene v = new Sukellusvene(k.getLeveys()/2, k.getPinta(),3000);
-        return new Pelilogiikka(app, k, v);
+        return new Pelilogiikka(kali,this, k, v);
     }
 }

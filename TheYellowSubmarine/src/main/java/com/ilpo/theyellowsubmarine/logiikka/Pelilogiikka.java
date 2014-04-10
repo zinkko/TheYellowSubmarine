@@ -7,6 +7,7 @@
 package com.ilpo.theyellowsubmarine.logiikka;
 
 import com.ilpo.theyellowsubmarine.Sovellus;
+import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Kivi;
@@ -22,24 +23,28 @@ import java.util.logging.Logger;
 public class Pelilogiikka implements Runnable{
     private final Kartta kartta;
     private final Sukellusvene vene;
-    private final Sovellus app;
+    //private final Sovellus app;
     private final Fysiikka fysiikka;
-    
+    private final Kayttoliittyma kali;
+    private final Sovelluslogiikka sovlog;
     /**
      * 
+     * @param kali käyttöliittymä
+     * @param sovlog sovelluslogiikka
      * @param app sovellus joka pöyrittää peliä
      * @param kartta kartta jolla pelataan
      * @param vene pelaajan vene
      */
-    public Pelilogiikka(Sovellus app, Kartta kartta, Sukellusvene vene){
+    public Pelilogiikka(Kayttoliittyma kali,Sovelluslogiikka sovlog, Kartta kartta, Sukellusvene vene){
         this.kartta = kartta;
         this.vene = vene;
-        this.app = app;
+        this.kali = kali;
+        this.sovlog = sovlog;
         this.fysiikka = new Fysiikka(vene);
     }
     
-    public Pelilogiikka(Sovellus app){
-        this(app, new Kartta(500,500,10,1), new Sukellusvene(100,100,3000));
+    public Pelilogiikka(Kayttoliittyma kali, Sovelluslogiikka sovlog){
+        this(kali, sovlog, new Kartta(500,500,10,1), new Sukellusvene(100,100,3000));
     }
     
     /**
@@ -51,9 +56,9 @@ public class Pelilogiikka implements Runnable{
         while (true){
             try {
                 peliJatkuu = suorita();
-                app.maalaa();
+                kali.maalaa();
                 if (!peliJatkuu){
-                    app.havio();
+                    sovlog.lopetaPeli();
                     break;
                 }
                 
