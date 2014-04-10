@@ -5,9 +5,6 @@
  */
 package com.ilpo.theyellowsubmarine.mallit;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  * pelaajan sukellusveneen toimintaa, lähinnä liikkumista kuvaava malli
  * x ja y ovat keskipisteen koordinaatteja.

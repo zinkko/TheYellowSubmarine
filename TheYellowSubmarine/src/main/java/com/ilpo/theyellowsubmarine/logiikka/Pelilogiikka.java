@@ -6,7 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
-import com.ilpo.theyellowsubmarine.Sovellus;
+import com.ilpo.theyellowsubmarine.Suunta;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 public class Pelilogiikka implements Runnable{
     private final Kartta kartta;
     private final Sukellusvene vene;
-    //private final Sovellus app;
     private final Fysiikka fysiikka;
     private final Kayttoliittyma kali;
     private final Sovelluslogiikka sovlog;
@@ -31,7 +30,6 @@ public class Pelilogiikka implements Runnable{
      * 
      * @param kali käyttöliittymä
      * @param sovlog sovelluslogiikka
-     * @param app sovellus joka pöyrittää peliä
      * @param kartta kartta jolla pelataan
      * @param vene pelaajan vene
      */
@@ -40,7 +38,7 @@ public class Pelilogiikka implements Runnable{
         this.vene = vene;
         this.kali = kali;
         this.sovlog = sovlog;
-        this.fysiikka = new Fysiikka(vene);
+        this.fysiikka = new Fysiikka(this.vene);
     }
     
     public Pelilogiikka(Kayttoliittyma kali, Sovelluslogiikka sovlog){
@@ -61,7 +59,6 @@ public class Pelilogiikka implements Runnable{
                     sovlog.lopetaPeli();
                     break;
                 }
-                
                 Thread.sleep(20);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,41 +77,40 @@ public class Pelilogiikka implements Runnable{
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         this.tarkistaKivet();
-        if (vene.getY()>kartta.getPinta()){
-            vene.kulutaHappi();
+        if (this.vene.getY()>kartta.getPinta()){
+            this.vene.kulutaHappi();
         }
         return vene.hengissa();
     }
     /**
      * muuttaa veneen liikettä. metodin kutsu muuttaa veneen nopeutta yhdellä
      * k.o. suuntaan
-     * @param direction suunta johon sukellusvene lähtee kiihdyttämään 
+     * @param suunta suunta johon sukellusvene lähtee kiihdyttämään 
      */
-    public void liiku(int direction){ 
+    public void liiku(Suunta suunta){ 
         int dx = 0;
         int dy = 0;
-        switch (direction){
-            case 0:
+        switch (suunta){
+            case OIKEA:
                 dx = 1;
                 break;
-            case 1:
+            case VASEN:
                 dx = -1;
                 break;
-            case 2:
+            case ALAS:
                 dy = 1;
                 break;
-            case 3:
+            case YLOS:
                 dy = -1;
                 break;
         }
-        vene.kiihdyta(dx, dy);
+        this.vene.kiihdyta(dx, dy);
     }
     
     /**
      * Pidä pelaaja kartalla
      */
     private void pidaPelaajaKartalla(){
-        
         if (vene.getX()<0){
             vene.setX(0);
             vene.pysahdyX();

@@ -6,6 +6,8 @@
 
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
+import com.ilpo.theyellowsubmarine.Suunta;
+import static com.ilpo.theyellowsubmarine.Suunta.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -30,25 +32,25 @@ public class PeliKuuntelija implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        int direction = -1;
+        Suunta suunta = null;
         switch(code){
             case KeyEvent.VK_W:
-                direction = 3;
+                suunta = YLOS;
                 break;
             case KeyEvent.VK_A:
-                direction = 1;
+                suunta = VASEN;
                 break;
             case KeyEvent.VK_S:
-                direction = 2;
+                suunta = ALAS;
                 break;
             case KeyEvent.VK_D:
-                direction = 0;
+                suunta = OIKEA;
                 break;
             //default:
                 //System.out.println("Hello world");
         }
-        if (direction != -1){
-            kali.move(direction);
+        if (suunta != null){
+            kali.move(suunta);
         }
     }
 

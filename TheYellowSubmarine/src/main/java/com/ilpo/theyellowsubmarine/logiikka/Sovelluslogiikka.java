@@ -32,7 +32,10 @@ public class Sovelluslogiikka {
     
     public void aloitaPeli() {
         Pelilogiikka logiikka = luoUusiPeli();
-        lopetaPeli(); // just in case
+        kali.setLogiikka(logiikka);
+        kali.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene());
+        
+        if (peliSaie!=null) peliSaie.interrupt();
         peliSaie = new Thread(logiikka);
         peliSaie.setDaemon(true);
         peliSaie.start();

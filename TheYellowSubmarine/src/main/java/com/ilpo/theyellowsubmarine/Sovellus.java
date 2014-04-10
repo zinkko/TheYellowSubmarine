@@ -9,7 +9,6 @@ import javax.swing.SwingUtilities;
  * @author ilari
  */
 public class Sovellus{
-    
 
     public static void main( String[] args ) {
         Kayttoliittyma kali = new Kayttoliittyma();
@@ -18,5 +17,4 @@ public class Sovellus{
         SwingUtilities.invokeLater(kali);
     }
  
-
 }

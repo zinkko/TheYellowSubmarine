@@ -6,6 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
+import static com.ilpo.theyellowsubmarine.Suunta.*;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Kivi;
@@ -118,22 +119,22 @@ public class PeliLogiikkaTest {
     
     @Test
     public void viestitKaliltaValittyy1(){
-        logiikka.liiku(0);
+        logiikka.liiku(OIKEA);
         oletaNopeus(1,0);
     }
     @Test
     public void viestitKaliltaValittyy2(){
-       logiikka.liiku(1); 
+       logiikka.liiku(VASEN); 
        oletaNopeus(-1,0);
     }
     @Test
     public void viestitKaliltaValittyy3(){
-        logiikka.liiku(2);
+        logiikka.liiku(ALAS);
         oletaNopeus(0,1);
     }
     @Test
     public void viestitKaliltaValittyy4(){
-        logiikka.liiku(3);
+        logiikka.liiku(YLOS);
         oletaNopeus(0,-1);
     }
     

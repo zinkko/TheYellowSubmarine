@@ -6,8 +6,11 @@
 
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
+import com.ilpo.theyellowsubmarine.Suunta;
 import com.ilpo.theyellowsubmarine.logiikka.Pelilogiikka;
 import com.ilpo.theyellowsubmarine.logiikka.Sovelluslogiikka;
+import com.ilpo.theyellowsubmarine.mallit.Kartta;
+import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -40,10 +43,6 @@ public class Kayttoliittyma implements Runnable{
         
     @Override
     public void run(){
-        if (logiikka==null) {
-            System.out.println("AARGH!");
-            return;
-        }
         
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600,520));
@@ -97,12 +96,13 @@ public class Kayttoliittyma implements Runnable{
         ((CardLayout) cards.getLayout()).show(cards, MENU);
     }
     
-    public Piirtaja getPiirtaja(){
-        return this.piirtaja;
+    public void alustaPiirtaja(Kartta k, Sukellusvene v){
+        this.piirtaja.setKartta(k);
+        this.piirtaja.setVene(v);
     }
     
-    public void move(int direction){
-        this.logiikka.liiku(direction);
+    public void move(Suunta suunta){
+        this.logiikka.liiku(suunta);
     }
     
     public void setLogiikka(Pelilogiikka logiikka){
