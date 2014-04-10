@@ -23,7 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
- *
+ * Pelin käyttöliittymän pääluokka. Luo piirtäjän ja kuuntelijat, sekä välittää viestejä
+ * logiikkaluokkien ja käyttöliittymäluokkien välillä
  * @author ilari
  */
 public class Kayttoliittyma implements Runnable{
@@ -74,6 +75,10 @@ public class Kayttoliittyma implements Runnable{
         ((CardLayout) cards.getLayout()).show(cards, MENU);
     }
     
+    /**
+     * luo sovelluksen alkuvalikko
+     * @return JPanel joka sisältää valikon
+     */
     private JPanel teeMenu(){
         JPanel menu = new JPanel(new GridLayout(2,1));
         JTextField nimi  = new JTextField("The Yellow Submarine!");
@@ -87,28 +92,51 @@ public class Kayttoliittyma implements Runnable{
         return menu;
     }
     
+    /**
+     * Näytä pelikenttä
+     */
     public void siirryPeliin(){
         sovlog.aloitaPeli();
         ((CardLayout) cards.getLayout()).show(cards, PELI);
     }
     
-    public void siirrySovellukseen(){
+    /**
+     * Näytä päävalikko
+     */
+    public void siirryValikkoon(){
         ((CardLayout) cards.getLayout()).show(cards, MENU);
     }
     
-    public void alustaPiirtaja(Kartta k, Sukellusvene v){
-        this.piirtaja.setKartta(k);
-        this.piirtaja.setVene(v);
+    /**
+     * Aseta piirtäjälle oikea kartta ja sukellusvene
+     * @param kartta
+     * @param vene 
+     */
+    public void alustaPiirtaja(Kartta kartta, Sukellusvene vene){
+        this.piirtaja.setKartta(kartta);
+        this.piirtaja.setVene(vene);
     }
     
-    public void move(Suunta suunta){
+    /**
+     * muuta veneen nopeutta halutulla tavalla
+     * @param suunta suunta johon kiihdytetään
+     */
+    public void kiihdyta(Suunta suunta){
         this.logiikka.liiku(suunta);
     }
     
+    /**
+     * Pelilogiikka vaihtuu, joka pelille on oma.
+     * @param logiikka kyseistä peli-instanssia vastaava logiikka
+     */
     public void setLogiikka(Pelilogiikka logiikka){
         this.logiikka = logiikka;
     }
     
+    /**
+     * Sovelluslogiikka ei vaihdu
+     * @param sovlog sovelluslogiikka
+     */
     public void setSovelluslogiikka(Sovelluslogiikka sovlog){
         this.sovlog = sovlog;
     }

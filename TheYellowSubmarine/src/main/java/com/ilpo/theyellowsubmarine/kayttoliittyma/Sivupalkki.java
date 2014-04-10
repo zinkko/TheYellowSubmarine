@@ -12,7 +12,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- *
+ * Palkki jossa näkyy pelaajan rahamäärä sekä happimäärä
  * @author ilari
  */
 public class Sivupalkki{
@@ -28,7 +28,7 @@ public class Sivupalkki{
     }
     
     public void piirra(Graphics g, int happi, int rahat){
-        g.setColor(Color.WHITE);
+        g.setColor(Color.LIGHT_GRAY);
         g.fillRect(x, y, leveys, korkeus);
         g.setColor(Color.RED);
         piirraHappiPalkki(g, happi);
@@ -56,7 +56,7 @@ public class Sivupalkki{
     }
     
     private void piirraRahat(Graphics g, int rahat){
-        g.setColor(Color.YELLOW.darker());
+        g.setColor(Color.ORANGE.brighter());
         g.setFont(new Font("Consolas", Font.BOLD, 24));
         char[] merkit = (""+rahat).toCharArray();
         g.drawChars(merkit, 0, merkit.length, x + leveys/4, y + korkeus*3/4);

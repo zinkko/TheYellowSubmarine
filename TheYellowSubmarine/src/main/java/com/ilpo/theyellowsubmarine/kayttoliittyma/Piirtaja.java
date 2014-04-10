@@ -25,11 +25,7 @@ public class Piirtaja extends JPanel{
     private Sukellusvene vene;
     private Sivupalkki palken;
     
-    /*public Piirtaja(Kartta kartta, Sukellusvene vene){
-        this.kartta = kartta;
-        this.vene = vene;
-    }*/
-    
+
     public Piirtaja(){
         this.palken = new Sivupalkki(500, 0, 100,500, 3000); // poista taikaluvut
     }

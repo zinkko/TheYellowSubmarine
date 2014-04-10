@@ -46,11 +46,9 @@ public class PeliKuuntelija implements KeyListener{
             case KeyEvent.VK_D:
                 suunta = OIKEA;
                 break;
-            //default:
-                //System.out.println("Hello world");
         }
         if (suunta != null){
-            kali.move(suunta);
+            kali.kiihdyta(suunta);
         }
     }
 

@@ -5,7 +5,8 @@ import com.ilpo.theyellowsubmarine.logiikka.Sovelluslogiikka;
 import javax.swing.SwingUtilities;
 
 /**
- * Sovelluksen pääluokka.
+ * Sovelluksen pääluokka. Luo toteutuksesta vastaavat oliot (Käyttöliittymä ja Sovelluslogiikka)
+ * ja käynnistää ne.
  * @author ilari
  */
 public class Sovellus{

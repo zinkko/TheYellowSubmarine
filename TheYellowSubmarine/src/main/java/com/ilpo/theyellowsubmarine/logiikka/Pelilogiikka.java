@@ -41,10 +41,6 @@ public class Pelilogiikka implements Runnable{
         this.fysiikka = new Fysiikka(this.vene);
     }
     
-    public Pelilogiikka(Kayttoliittyma kali, Sovelluslogiikka sovlog){
-        this(kali, sovlog, new Kartta(500,500,10,1), new Sukellusvene(100,100,3000));
-    }
-    
     /**
      * pelin "kello"
      */

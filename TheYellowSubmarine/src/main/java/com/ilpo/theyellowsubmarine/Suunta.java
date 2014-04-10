@@ -7,7 +7,7 @@
 package com.ilpo.theyellowsubmarine;
 
 /**
- *
+ * Suunta johon sukellusvene voi kiihdyttää
  * @author ilari
  */
 public enum Suunta {

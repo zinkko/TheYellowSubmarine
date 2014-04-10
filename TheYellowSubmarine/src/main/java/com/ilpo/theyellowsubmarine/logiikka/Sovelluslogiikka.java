@@ -27,7 +27,7 @@ public class Sovelluslogiikka {
     public void lopetaPeli(){
         if (peliSaie==null) return;
         peliSaie.interrupt();
-        kali.siirrySovellukseen();
+        kali.siirryValikkoon();
     }
     
     public void aloitaPeli() {
