@@ -11,7 +11,8 @@ import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 
 /**
- * Ei vielä implementoitu. Tänne sovelluksen logiikka, esim. menu
+ * Hoitaa sovelluksen toimintaa, aloittaa pelit, lopettaa pelit, hallitsee siirtymistä
+ * valikon ja pelinäkymän välillä.
  * @author ilari
  */
 public class Sovelluslogiikka {
@@ -24,12 +25,18 @@ public class Sovelluslogiikka {
         this.kali.setLogiikka(peli);
     }
        
+    /**
+     * keskeytä meneillään oleva peli
+     */
     public void lopetaPeli(){
         if (peliSaie==null) return;
         peliSaie.interrupt();
         kali.siirryValikkoon();
     }
     
+    /**
+     * aloita uusi peli
+     */
     public void aloitaPeli() {
         Pelilogiikka logiikka = luoUusiPeli();
         kali.setLogiikka(logiikka);
@@ -41,9 +48,17 @@ public class Sovelluslogiikka {
         peliSaie.start();
     }
     
+    /**
+     * luo uusi Pelilogiikka-olio uutta peliä varten
+     * @return uuden pelin logiikka
+     */
     private Pelilogiikka luoUusiPeli(){
         Kartta k = new Kartta(500,500,20,1);
         Sukellusvene v = new Sukellusvene(k.getLeveys()/2, k.getPinta(),3000);
         return new Pelilogiikka(kali,this, k, v);
+    }
+    
+    public boolean peliKaynnissa(){
+        return this.peliSaie.isAlive();
     }
 }

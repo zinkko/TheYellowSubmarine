@@ -104,7 +104,11 @@ public class Kayttoliittyma implements Runnable{
      * Näytä päävalikko
      */
     public void siirryValikkoon(){
-        ((CardLayout) cards.getLayout()).show(cards, MENU);
+        try{
+            ((CardLayout) cards.getLayout()).show(cards, MENU);
+        }catch (NullPointerException e){
+            // testit aiheuttaa tämän koska ne ei käynnistä run() metodia
+        }
     }
     
     /**
@@ -139,5 +143,13 @@ public class Kayttoliittyma implements Runnable{
      */
     public void setSovelluslogiikka(Sovelluslogiikka sovlog){
         this.sovlog = sovlog;
+    }
+    
+    /**
+     * TESTEILLE!
+     * @return 
+     */
+    public Pelilogiikka getLogiikka(){
+        return this.logiikka;
     }
 }

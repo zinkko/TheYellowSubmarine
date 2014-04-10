@@ -8,9 +8,11 @@ package com.ilpo.theyellowsubmarine.logiikka;
 
 import static com.ilpo.theyellowsubmarine.Suunta.*;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
+import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Kivi;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +31,8 @@ public class PeliLogiikkaTest {
     private Kartta kartta;
     private int kartanLeveys;
     private int kartanKorkeus;
+    private int alkuX = 5;
+    private int alkuY = 5;
     private Kivi kivi;
     
     public PeliLogiikkaTest() {
@@ -46,8 +50,8 @@ public class PeliLogiikkaTest {
     public void setUp() {
         this.kartanKorkeus = 300;
         this.kartanLeveys = 300;
-        this.kartta=  new Kartta(this.kartanLeveys,this.kartanKorkeus,0);
-        this.vene= new Sukellusvene(5,5,1);
+        this.kartta=  new Kartta(this.kartanLeveys,this.kartanKorkeus,1);
+        this.vene= new Sukellusvene(alkuX,alkuY,1);
         logiikka = new Pelilogiikka(new Kayttoliittyma(), new Sovelluslogiikka(new Kayttoliittyma()), kartta,vene);
         this.kivi = new Kivi(50,50,50,50);
         //kartta.lisaaKivi(kivi);
@@ -69,8 +73,18 @@ public class PeliLogiikkaTest {
         vene.liiku();
         vene.liiku();
         logiikka.suorita();
-        oletaPaikka(0,0);
+        oletaPaikka(0,kartta.getPinta());
 
+    }
+    
+    @Test
+    public void venePysyyPinnalla(){
+        vene.setY(kartta.getPinta()+1);
+        vene.kiihdyta(1,-2);
+        vene.liiku();
+        vene.liiku();
+        logiikka.suorita();
+        oletaPaikka(alkuX+2,kartta.getPinta());
     }
     
     @Test
@@ -136,6 +150,27 @@ public class PeliLogiikkaTest {
     public void viestitKaliltaValittyy4(){
         logiikka.liiku(YLOS);
         oletaNopeus(0,-1);
+    }
+    
+    @Test
+    public void aarteetKeraytyvat(){
+        List<Aarre> aarteet = logiikka.getKartta().getAarteet();
+        Aarre a = aarteet.get(0);
+        int alussa = aarteet.size();
+        vene.setX(a.getX());
+        vene.setY(a.getY());
+        logiikka.suorita();
+        assertEquals(alussa -1, aarteet.size());
+    }
+    
+    @Test
+    public void pelaajaRikastuuOikein(){
+        List<Aarre> aarteet = logiikka.getKartta().getAarteet();
+        Aarre a = aarteet.get(0);
+        vene.setX(a.getX());
+        vene.setY(a.getY());
+        logiikka.suorita();
+        assertEquals(a.getArvo(), logiikka.getPelaajanRahat());
     }
     
       

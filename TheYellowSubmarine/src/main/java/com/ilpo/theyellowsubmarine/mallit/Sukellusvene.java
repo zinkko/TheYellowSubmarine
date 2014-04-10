@@ -203,4 +203,12 @@ public class Sukellusvene {
         this.x=x;
         this.y = y;
     }
+    
+    /**
+     * vain testeille HUOM
+     * @param h 
+     */
+    public void setHappi(int h){
+        this.happitaso = h;
+    }
 }

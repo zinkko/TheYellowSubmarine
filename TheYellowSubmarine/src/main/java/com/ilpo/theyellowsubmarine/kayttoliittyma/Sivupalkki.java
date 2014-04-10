@@ -28,7 +28,7 @@ public class Sivupalkki{
     }
     
     public void piirra(Graphics g, int happi, int rahat){
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(Color.WHITE);
         g.fillRect(x, y, leveys, korkeus);
         g.setColor(Color.RED);
         piirraHappiPalkki(g, happi);
@@ -50,11 +50,21 @@ public class Sivupalkki{
         g.fillRect(px, py, lev, kork);
     }
     
+    /**
+     * laskee happipalkin korkeuden
+     * @param happi pelaajan happimäärä
+     * @return piirrettävän palkin korkeus
+     */
     private int laskeKorkeus(int happi){
         int maxKorkeus = korkeus/2-20;
         return maxKorkeus - (maxHappi-happi)*maxKorkeus/maxHappi;
     }
     
+    /**
+     * Piirrä rahojen lukumäärä
+     * @param g grafiikka
+     * @param rahat pelaajan rahamäärä
+     */
     private void piirraRahat(Graphics g, int rahat){
         g.setColor(Color.ORANGE.brighter());
         g.setFont(new Font("Consolas", Font.BOLD, 24));

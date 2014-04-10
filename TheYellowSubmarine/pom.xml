@@ -39,7 +39,8 @@
                 <configuration>
                     <instrumentation>
                         <includes>
-                            <include>com.ilpo.theyellowsubmarine/*.class</include>
+                            <include>com.ilpo.theyellowsubmarine/logiikka/*.class</include>
+                            <include>com.ilpo.theyellowsubmarine/mallit/*.class</include>
                         </includes>
                     </instrumentation>
                 </configuration>
@@ -51,12 +52,12 @@
                 <version>0.30</version>
                 <configuration>
                     <targetClasses>
-                        <param>com.ilpo.theyellowsubmarine.*</param>
-                        
+                        <param>com.ilpo.theyellowsubmarine.logiikka.*</param>
+                        <param>com.ilpo.theyellowsubmarine.mallit.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.ilpo.theyellowsubmarine.*</param>
-                        
+                        <param>com.ilpo.theyellowsubmarine.logiikka.*</param>
+                        <param>com.ilpo.theyellowsubmarine.mallit.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

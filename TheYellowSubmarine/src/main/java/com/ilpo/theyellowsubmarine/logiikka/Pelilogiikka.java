@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Pelin toimintaa ohjaava luokka.
+ * Jokaisella pelillä on oma Logiikka-olionsa
  * @author ilari
  */
 public class Pelilogiikka implements Runnable{
@@ -26,6 +27,7 @@ public class Pelilogiikka implements Runnable{
     private final Fysiikka fysiikka;
     private final Kayttoliittyma kali;
     private final Sovelluslogiikka sovlog;
+    
     /**
      * 
      * @param kali käyttöliittymä
