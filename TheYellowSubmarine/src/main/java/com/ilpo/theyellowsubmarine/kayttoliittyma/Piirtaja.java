@@ -26,8 +26,8 @@ public class Piirtaja extends JPanel{
     private Sivupalkki palken;
     
 
-    public Piirtaja(){
-        this.palken = new Sivupalkki(500, 0, 100,500, 3000); // poista taikaluvut
+    public Piirtaja(int kartanleveys, int kartankorkeus){
+        this.palken = new Sivupalkki(kartanleveys-100, 0, 100,kartankorkeus ,3000); // poista taikaluvut
     }
 
     public void setKartta(Kartta kartta) {

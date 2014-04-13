@@ -15,18 +15,16 @@ import javax.swing.JButton;
  *
  * @author ilari
  */
-public class SovellusKuuntelija implements ActionListener{
+public class Sovelluskuuntelija implements ActionListener{
     
-    private final JButton nappula;
     private final Kayttoliittyma kali;
     
-    public SovellusKuuntelija(Kayttoliittyma kali, JButton nappula){
-        this.nappula = nappula;
+    public Sovelluskuuntelija(Kayttoliittyma kali){
         this.kali = kali;
     }
     
     @Override
     public void actionPerformed(ActionEvent e){
-        kali.siirryPeliin();
+        
     }
 }

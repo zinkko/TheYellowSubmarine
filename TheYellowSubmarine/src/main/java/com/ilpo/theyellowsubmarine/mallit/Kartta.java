@@ -53,8 +53,8 @@ public class Kartta {
             return;
         }
         Kivi kivi1 = new Kivi(leveys/4,korkeus/3,leveys/2,korkeus/4);
-        Kivi kivi2 = new Kivi(leveys/10,korkeus/3*2,leveys/3,korkeus/4);
-        Kivi kivi3 = new Kivi(leveys/2+leveys/8,korkeus/3*2,leveys/3,korkeus/4);
+        Kivi kivi2 = new Kivi(leveys/10,korkeus/3*2,leveys/4,korkeus/5);
+        Kivi kivi3 = new Kivi(leveys/2+leveys/8,korkeus/3*2,leveys/4,korkeus/5);
         this.kivet.add(kivi1);
         kivet.add(kivi2);
         kivet.add(kivi3);
@@ -62,16 +62,9 @@ public class Kartta {
     
     private void generoiAarteet(int maara){
         for (int i=0;i<maara;i++){
-            generoiAarre(5); // TODO: jännempi arvo aarteiden arvoille
+            int arvo = random.nextInt(5)+5;
+            generoiAarre(arvo);
         }
-    }
-
-    public int getLeveys() {
-        return leveys;
-    }
-
-    public int getKorkeus() {
-        return korkeus;
     }
     
     /**
@@ -80,9 +73,17 @@ public class Kartta {
      */
     private void generoiAarre(int arvo){
         int x = random.nextInt(leveys-10)+5;
-        int y = random.nextInt(korkeus-10)+5;
+        int y = random.nextInt(korkeus-10)+this.getPinta() + 10;
         Aarre uusiAarre = new Aarre(x,y,arvo);
         this.aarteet.add(uusiAarre);
+    }
+    
+    public int getLeveys() {
+        return leveys;
+    }
+
+    public int getKorkeus() {
+        return korkeus;
     }
     
     public LinkedList<Aarre> getAarteet() {

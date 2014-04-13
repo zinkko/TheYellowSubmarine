@@ -12,7 +12,9 @@ import javax.swing.SwingUtilities;
 public class Sovellus{
 
     public static void main( String[] args ) {
-        Kayttoliittyma kali = new Kayttoliittyma();
+        int ikkunanPituus = 700;
+        int ikkunanLeveys = 1000;
+        Kayttoliittyma kali = new Kayttoliittyma(ikkunanLeveys,ikkunanPituus);
         Sovelluslogiikka sovlog = new Sovelluslogiikka(kali);
         kali.setSovelluslogiikka(sovlog);
         SwingUtilities.invokeLater(kali);

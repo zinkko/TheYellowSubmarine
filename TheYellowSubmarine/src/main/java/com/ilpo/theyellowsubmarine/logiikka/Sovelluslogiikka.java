@@ -53,7 +53,9 @@ public class Sovelluslogiikka {
      * @return uuden pelin logiikka
      */
     private Pelilogiikka luoUusiPeli(){
-        Kartta k = new Kartta(500,500,20,1);
+        int leveys = this.kali.getKartanLeveys();
+        int pituus = this.kali.getKartanPituus();
+        Kartta k = new Kartta(leveys,pituus,20,1);
         Sukellusvene v = new Sukellusvene(k.getLeveys()/2, k.getPinta(),3000);
         return new Pelilogiikka(kali,this, k, v);
     }

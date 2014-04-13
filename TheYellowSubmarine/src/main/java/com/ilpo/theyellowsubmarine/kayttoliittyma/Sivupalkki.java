@@ -66,7 +66,7 @@ public class Sivupalkki{
      * @param rahat pelaajan rahamäärä
      */
     private void piirraRahat(Graphics g, int rahat){
-        g.setColor(Color.ORANGE.brighter());
+        g.setColor(Color.ORANGE);
         g.setFont(new Font("Consolas", Font.BOLD, 24));
         char[] merkit = (""+rahat).toCharArray();
         g.drawChars(merkit, 0, merkit.length, x + leveys/4, y + korkeus*3/4);

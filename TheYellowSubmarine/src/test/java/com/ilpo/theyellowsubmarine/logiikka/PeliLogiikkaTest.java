@@ -52,7 +52,7 @@ public class PeliLogiikkaTest {
         this.kartanLeveys = 300;
         this.kartta=  new Kartta(this.kartanLeveys,this.kartanKorkeus,1);
         this.vene= new Sukellusvene(alkuX,alkuY,1);
-        logiikka = new Pelilogiikka(new Kayttoliittyma(), new Sovelluslogiikka(new Kayttoliittyma()), kartta,vene);
+        logiikka = new Pelilogiikka(new Kayttoliittyma(0,0), new Sovelluslogiikka(new Kayttoliittyma(0,0)), kartta,vene);
         this.kivi = new Kivi(50,50,50,50);
         //kartta.lisaaKivi(kivi);
     }

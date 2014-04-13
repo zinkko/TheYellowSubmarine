@@ -16,9 +16,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -36,17 +38,20 @@ public class Kayttoliittyma implements Runnable{
     private Sovelluslogiikka sovlog;
     private static final String MENU = "menu";
     private static final String PELI = "game";
+    private int pituus,leveys;
     
-    public Kayttoliittyma(){
+    public Kayttoliittyma(int leveys, int pituus){
         this.frame = new JFrame();
-        this.piirtaja = new Piirtaja();
+        this.piirtaja = new Piirtaja(leveys,pituus);
+        this.leveys = leveys;
+        this.pituus = pituus;
     }
         
     @Override
     public void run(){
         
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.frame.setPreferredSize(new Dimension(600,520));
+        this.frame.setPreferredSize(new Dimension(300,500));
 
         luoKomponentit(frame.getContentPane());
         
@@ -80,22 +85,56 @@ public class Kayttoliittyma implements Runnable{
      * @return JPanel joka sisältää valikon
      */
     private JPanel teeMenu(){
-        JPanel menu = new JPanel(new GridLayout(2,1));
+        JPanel menu = new JPanel(new GridLayout(4,1));
+        // nimi
         JTextField nimi  = new JTextField("The Yellow Submarine!");
         nimi.setEditable(false);
-        nimi.setFont(new Font("Sans-Serif",Font.BOLD, 24));
+        nimi.setFont(new Font("Sans-Serif",Font.BOLD, 18));
+        
         JButton alku = new JButton("aloita!");
-        alku.addActionListener(new SovellusKuuntelija(this, alku));
+        JButton stats = new JButton("tulokset");
+        
+        JPanel vaikeudet = teeVaikeusAsteValinta();
+        
+        // kuuntelija
+        Sovelluskuuntelija k = new Sovelluskuuntelija(this);
+        alku.addActionListener(k);
+        stats.addActionListener(k);
+        
+        // lisaa kaikki
         menu.add(nimi);
         menu.add(alku);
+        menu.add(vaikeudet);
+        menu.add(stats);
         
         return menu;
     }
+    
+    private JPanel teeVaikeusAsteValinta(){
+        JPanel ret = new JPanel(new GridLayout(1,3));
+        
+        JRadioButton helppo = new JRadioButton("helppo");
+        JRadioButton semi = new JRadioButton("perus");
+        JRadioButton pro = new JRadioButton("MLG-pro");
+        
+        ret.add(helppo);
+        ret.add(semi);
+        ret.add(pro);
+        
+        ButtonGroup vaikeus = new ButtonGroup();
+        vaikeus.add(helppo);
+        vaikeus.add(semi);
+        vaikeus.add(pro);
+
+        return ret;
+    }
+            
     
     /**
      * Näytä pelikenttä
      */
     public void siirryPeliin(){
+        frame.setSize(new Dimension(this.leveys, this.pituus+20));
         sovlog.aloitaPeli();
         ((CardLayout) cards.getLayout()).show(cards, PELI);
     }
@@ -104,6 +143,7 @@ public class Kayttoliittyma implements Runnable{
      * Näytä päävalikko
      */
     public void siirryValikkoon(){
+        frame.setSize(new Dimension(200,500));
         try{
             ((CardLayout) cards.getLayout()).show(cards, MENU);
         }catch (NullPointerException e){
@@ -143,6 +183,14 @@ public class Kayttoliittyma implements Runnable{
      */
     public void setSovelluslogiikka(Sovelluslogiikka sovlog){
         this.sovlog = sovlog;
+    }
+    
+    public int getKartanLeveys(){
+        return this.leveys -100;
+    }
+    
+    public int getKartanPituus(){
+        return this.pituus;
     }
     
     /**
