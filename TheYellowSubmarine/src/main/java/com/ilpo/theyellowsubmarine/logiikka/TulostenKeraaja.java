@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.ilpo.theyellowsubmarine;
+package com.ilpo.theyellowsubmarine.logiikka;
 
 /**
  *
  * @author ilari
  */
-public enum Vaikeustaso {
-    HELPPO, KESKIVAIKEA, VAIKEA;
+public class TulostenKeraaja {
+    
 }
