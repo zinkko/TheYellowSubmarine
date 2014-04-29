@@ -6,6 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.logiikka;
 
+import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
@@ -18,10 +19,12 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 public class Sovelluslogiikka {
     private final Kayttoliittyma kali;
     private Thread peliSaie;
+    private final Tulostenkeraaja stats;
     
     public Sovelluslogiikka(Kayttoliittyma kali){
         this.kali = kali;
-        Pelilogiikka peli = this.luoUusiPeli();
+        this.stats = new Tulostenkeraaja();
+        Pelilogiikka peli = this.luoUusiPeli(Vaikeustaso.HELPPO);
         this.kali.setLogiikka(peli);
     }
        
@@ -37,9 +40,10 @@ public class Sovelluslogiikka {
     
     /**
      * aloita uusi peli
+     * @param vaikeus pelin vaikeustaso
      */
-    public void aloitaPeli() {
-        Pelilogiikka logiikka = luoUusiPeli();
+    public void aloitaPeli(Vaikeustaso vaikeus) {
+        Pelilogiikka logiikka = luoUusiPeli(vaikeus);
         kali.setLogiikka(logiikka);
         kali.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene());
         
@@ -53,12 +57,12 @@ public class Sovelluslogiikka {
      * luo uusi Pelilogiikka-olio uutta peliä varten
      * @return uuden pelin logiikka
      */
-    private Pelilogiikka luoUusiPeli(){
+    private Pelilogiikka luoUusiPeli(Vaikeustaso vaikeus){
         int leveys = this.kali.getKartanLeveys();
         int pituus = this.kali.getKartanPituus();
         Kartta k = new Kartta(leveys,pituus,20,1);
         Sukellusvene v = new Sukellusvene(k.getLeveys()/2, k.getPinta(),3000);
-        return new Pelilogiikka(kali,this, k, v);
+        return new Pelilogiikka(kali,this, k, v, stats,vaikeus);
     }
     
     public boolean peliKaynnissa(){

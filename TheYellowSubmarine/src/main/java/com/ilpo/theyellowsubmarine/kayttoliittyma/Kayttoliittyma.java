@@ -6,6 +6,7 @@
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
 import static com.ilpo.theyellowsubmarine.kayttoliittyma.Sovelluskuuntelija.*;
+import static com.ilpo.theyellowsubmarine.Vaikeustaso.*;
 import com.ilpo.theyellowsubmarine.Suunta;
 import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.logiikka.Pelilogiikka;
@@ -47,6 +48,7 @@ public class Kayttoliittyma implements Runnable {
     private static final String TULOKSET = "stats";
     private final int pituus, leveys;
     private final Tulostenkeraaja tulokset;
+    private Vaikeustaso vaikeus = HELPPO;
 
     public Kayttoliittyma(int leveys, int pituus, Tulostenkeraaja tulokset) {
         this.frame = new JFrame();
@@ -148,7 +150,7 @@ public class Kayttoliittyma implements Runnable {
         vaikeus.add(helppo);
         vaikeus.add(semi);
         vaikeus.add(pro);
-
+        
         return ret;
     }
 
@@ -157,12 +159,13 @@ public class Kayttoliittyma implements Runnable {
      */
     public void siirryPeliin() {
         frame.setSize(new Dimension(this.leveys, this.pituus + 20));
-        sovlog.aloitaPeli();
+        sovlog.aloitaPeli(vaikeus);
         ((CardLayout) cards.getLayout()).show(cards, PELI);
     }
 
     /**
      * Näytä päävalikko
+     * @param voitto onko peli päättynyt voittoon
      */
     public void siirryValikkoon(boolean voitto) {
         if (voitto){
@@ -181,11 +184,16 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void naytaTulokset() {
-        Map<String, String> tiedot = tulokset.lueTulokset();
+        Map<String, String> tiedot = tulokset.getTulokset();
+        String teksti = "";
+        for (String avain : tiedot.keySet()){
+            teksti += avain +": "+tiedot.get(avain)+"\n";
+        }
+        JOptionPane.showMessageDialog(frame, teksti,"Tulokset", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void asetaVaikeusTaso(Vaikeustaso vaikeus) {
-        System.out.println(vaikeus);
+         this.vaikeus = vaikeus;
     }
 
     /**

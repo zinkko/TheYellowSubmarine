@@ -7,6 +7,7 @@
 package com.ilpo.theyellowsubmarine.logiikka;
 
 import static com.ilpo.theyellowsubmarine.Suunta.*;
+import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
@@ -52,7 +53,8 @@ public class PeliLogiikkaTest {
         this.kartanLeveys = 300;
         this.kartta=  new Kartta(this.kartanLeveys,this.kartanKorkeus,1);
         this.vene= new Sukellusvene(alkuX,alkuY,1);
-        logiikka = new Pelilogiikka(new Kayttoliittyma(0,0,null), new Sovelluslogiikka(new Kayttoliittyma(0,0,null)), kartta,vene);
+        logiikka = new Pelilogiikka(new Kayttoliittyma(0,0,null), new Sovelluslogiikka(
+                new Kayttoliittyma(0,0,null)), kartta,vene,null,Vaikeustaso.HELPPO);
         this.kivi = new Kivi(50,50,50,50);
         //kartta.lisaaKivi(kivi);
     }

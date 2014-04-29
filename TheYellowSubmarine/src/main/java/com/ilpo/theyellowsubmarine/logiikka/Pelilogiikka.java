@@ -7,6 +7,7 @@
 package com.ilpo.theyellowsubmarine.logiikka;
 
 import com.ilpo.theyellowsubmarine.Suunta;
+import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
@@ -15,6 +16,7 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ilpo.theyellowsubmarine.logiikka.Tulostenkeraaja.*;
 
 /**
  * Pelin toimintaa ohjaava luokka.
@@ -27,20 +29,26 @@ public class Pelilogiikka implements Runnable{
     private final Fysiikka fysiikka;
     private final Kayttoliittyma kali;
     private final Sovelluslogiikka sovlog;
-    
+    private final Vaikeustaso vaikeus;
+    private Tulostenkeraaja tulostenHoitaja;
     /**
      * 
      * @param kali käyttöliittymä
      * @param sovlog sovelluslogiikka
      * @param kartta kartta jolla pelataan
      * @param vene pelaajan vene
+     * @param stats tulostenkeraaja joka tallettaa pelin tulokset lopussa
+     * @param vaikeus pelin vaikeustaso
      */
-    public Pelilogiikka(Kayttoliittyma kali,Sovelluslogiikka sovlog, Kartta kartta, Sukellusvene vene){
+    public Pelilogiikka(Kayttoliittyma kali,Sovelluslogiikka sovlog, Kartta kartta,
+            Sukellusvene vene, Tulostenkeraaja stats, Vaikeustaso vaikeus){
         this.kartta = kartta;
         this.vene = vene;
         this.kali = kali;
         this.sovlog = sovlog;
         this.fysiikka = new Fysiikka(this.vene);
+        this.tulostenHoitaja = stats;
+        this.vaikeus = vaikeus;
     }
     
     /**
@@ -54,6 +62,8 @@ public class Pelilogiikka implements Runnable{
                 suorita();
                 kali.maalaa();
                 if (peliHavitty() || peliVoitettu()){
+                    keraaTulokset();
+                    this.tulostenHoitaja.kirjoitaTulokset();
                     sovlog.lopetaPeli(peliVoitettu());
                     break;
                 }
@@ -61,6 +71,27 @@ public class Pelilogiikka implements Runnable{
             } catch (InterruptedException ex) {
                 Logger.getLogger(Pelilogiikka.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    public void keraaTulokset(){
+        if (peliVoitettu()){
+            this.tulostenHoitaja.muutaTietoa(VOITOT, 1);
+        }else{
+            this.tulostenHoitaja.muutaTietoa(HAVIOT, 1);
+        }
+        this.tulostenHoitaja.muutaTietoa(PELIT, 1);
+        
+        switch(vaikeus){
+            case HELPPO:
+                this.tulostenHoitaja.muutaTietoa(RAHAT_H, vene.getRahat());
+                break;
+            case KESKIVAIKEA:
+                this.tulostenHoitaja.muutaTietoa(RAHAT_M, vene.getRahat());
+                break;
+            case VAIKEA:
+                this.tulostenHoitaja.muutaTietoa(RAHAT_V, vene.getRahat());
+                break;
         }
     }
     

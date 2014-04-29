@@ -1,5 +1,6 @@
-kuolemat=0
-pelit=0
-maxaarteita=0
-maxrahaa=0
-minhappi=0
+1:häviöt
+50:suurin kerätty rahamäärä (helppo)
+5:voitot
+138:suurin kerätty rahamäärä (vaikea)
+40:suurin kerätty rahamäärä (keskivaikea)
+6:pelit

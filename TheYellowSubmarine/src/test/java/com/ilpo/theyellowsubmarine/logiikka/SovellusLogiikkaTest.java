@@ -7,6 +7,7 @@
 package com.ilpo.theyellowsubmarine.logiikka;
 
 import com.ilpo.theyellowsubmarine.Suunta;
+import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.kayttoliittyma.Kayttoliittyma;
 import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
 import org.junit.After;
@@ -61,9 +62,9 @@ public class SovellusLogiikkaTest {
     @Test
     public void logiikkaVaihtuuPelinVaihtuessa(){
         Pelilogiikka eka = kali.getLogiikka();
-        sovlog.lopetaPeli();
-        sovlog.aloitaPeli();
-        sovlog.lopetaPeli(); // keskeytä säie
+        sovlog.lopetaPeli(true);
+        sovlog.aloitaPeli(Vaikeustaso.HELPPO);
+        sovlog.lopetaPeli(true); // keskeytä säie
         
         assertTrue(!eka.equals(kali.getLogiikka()));
     }
