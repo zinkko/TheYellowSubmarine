@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package com.ilpo.theyellowsubmarine.logiikka;
+package fysiikkasimulaattori;
 
 /**
  *
  * @author ilari
  */
-public class TulostenKeraaja {
+public class Hiukkanen {
+    private int varaus;
+    private double x, y;
     
 }

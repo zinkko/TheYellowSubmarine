@@ -51,10 +51,10 @@ public class Pelilogiikka implements Runnable{
         boolean peliJatkuu;
         while (true){
             try {
-                peliJatkuu = suorita();
+                suorita();
                 kali.maalaa();
-                if (!peliJatkuu){
-                    sovlog.lopetaPeli();
+                if (peliHavitty() || peliVoitettu()){
+                    sovlog.lopetaPeli(peliVoitettu());
                     break;
                 }
                 Thread.sleep(20);
@@ -67,9 +67,9 @@ public class Pelilogiikka implements Runnable{
     /**
      * logiikan toiminnan päämetodi. Run kutsuu tätä tasaisesti
      * (public koska testit :D)
-     * @return false jos peli on ohi.
+     * 
      */
-    public boolean suorita(){ // TODO: rename this
+    public void suorita(){ // TODO: rename this
         //vene.liiku();
         this.fysiikka.seuraava();
         this.pidaPelaajaKartalla();
@@ -78,8 +78,17 @@ public class Pelilogiikka implements Runnable{
         if (this.vene.getY()>kartta.getPinta()){
             this.vene.kulutaHappi();
         }
-        return vene.hengissa();
+        //return vene.hengissa() && kartta.maalissa(vene.getX(), vene.getY());
     }
+    
+    public boolean peliVoitettu(){
+        return kartta.maalissa(vene.getX(), vene.getY());
+    }
+    
+    public boolean peliHavitty(){
+        return !vene.hengissa();
+    }
+    
     /**
      * muuttaa veneen liikettä. metodin kutsu muuttaa veneen nopeutta yhdellä
      * k.o. suuntaan

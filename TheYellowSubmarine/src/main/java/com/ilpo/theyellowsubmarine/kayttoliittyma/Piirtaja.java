@@ -65,7 +65,11 @@ public class Piirtaja extends JPanel{
         
         for (Kivi k:this.kartta.getKivet()){
             piirraKivi(g,k);
-        }    
+        }
+        
+        int[] data = kartta.getMaali();
+        g.setColor(Color.RED);
+        g.fillRect(data[0], data[1], data[2], data[3]);
     }
     
     private void piirraVene(Graphics g){

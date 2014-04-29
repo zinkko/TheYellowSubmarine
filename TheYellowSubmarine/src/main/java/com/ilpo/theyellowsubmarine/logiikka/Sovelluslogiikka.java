@@ -27,11 +27,12 @@ public class Sovelluslogiikka {
        
     /**
      * keskeytä meneillään oleva peli
+     * @param voitto onko peli päättynyt voittoon vai häviöön
      */
-    public void lopetaPeli(){
+    public void lopetaPeli(boolean voitto){
         if (peliSaie==null) return;
         peliSaie.interrupt();
-        kali.siirryValikkoon();
+        kali.siirryValikkoon(voitto);
     }
     
     /**

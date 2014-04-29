@@ -1,0 +1,5 @@
+kuolemat=0
+pelit=0
+maxaarteita=0
+maxrahaa=0
+minhappi=0

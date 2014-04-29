@@ -38,7 +38,7 @@ public class SovellusLogiikkaTest {
     
     @Before
     public void setUp() {
-        kali = new Kayttoliittyma(0,0);
+        kali = new Kayttoliittyma(0,0,null);
         sovlog = new Sovelluslogiikka(kali);
         kali.setSovelluslogiikka(sovlog);
     }

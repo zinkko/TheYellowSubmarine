@@ -21,6 +21,7 @@ public class Kartta {
     private int alkuX, alkuY;
     private final int pinta = 15;
     private Random random;
+    private int[] maali;
     
     /**
      * pääkonstruktori
@@ -31,6 +32,7 @@ public class Kartta {
         this.random = new Random();
         this.korkeus = korkeus;
         this.leveys = leveys;
+        this.maali = new int[]{leveys-50,0, 50,pinta*2}; // x,y,leveys,korkeus
         this.generoiKivet(kivienMaara);
         this.generoiAarteet(aarteidenMaara);
     }
@@ -76,6 +78,15 @@ public class Kartta {
         int y = random.nextInt(korkeus-10)+this.getPinta() + 10;
         Aarre uusiAarre = new Aarre(x,y,arvo);
         this.aarteet.add(uusiAarre);
+    }
+    
+    public int[] getMaali(){
+        return maali;
+    }
+    
+    public boolean maalissa(int x, int y){
+        return (maali[0] < x && x < maali[0] + maali[2]) &&
+                (maali[1] < y && y < maali[1] + maali[3]);
     }
     
     public int getLeveys() {
