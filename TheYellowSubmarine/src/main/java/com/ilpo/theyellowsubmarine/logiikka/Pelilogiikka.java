@@ -84,13 +84,13 @@ public class Pelilogiikka implements Runnable{
         
         switch(vaikeus){
             case HELPPO:
-                this.tulostenHoitaja.muutaTietoa(RAHAT_H, vene.getRahat());
+                this.tulostenHoitaja.asetaTieto(RAHAT_H, vene.getRahat());
                 break;
             case KESKIVAIKEA:
-                this.tulostenHoitaja.muutaTietoa(RAHAT_M, vene.getRahat());
+                this.tulostenHoitaja.asetaTieto(RAHAT_M, vene.getRahat());
                 break;
             case VAIKEA:
-                this.tulostenHoitaja.muutaTietoa(RAHAT_V, vene.getRahat());
+                this.tulostenHoitaja.asetaTieto(RAHAT_V, vene.getRahat());
                 break;
         }
     }
