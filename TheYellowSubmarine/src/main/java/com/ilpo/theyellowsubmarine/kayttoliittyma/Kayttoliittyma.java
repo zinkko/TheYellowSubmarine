@@ -50,6 +50,12 @@ public class Kayttoliittyma implements Runnable {
     private final Tulostenkeraaja tulokset;
     private Vaikeustaso vaikeus = HELPPO;
 
+    /**
+     * 
+     * @param leveys pelille varattavan alueen leveys
+     * @param pituus pelille varattavan alueen pituus
+     * @param tulokset Tulostenkeraaja-luokka pelin tulosten tilastointiin 
+     */
     public Kayttoliittyma(int leveys, int pituus, Tulostenkeraaja tulokset) {
         this.frame = new JFrame();
         this.piirtaja = new Piirtaja(leveys, pituus);
@@ -75,6 +81,10 @@ public class Kayttoliittyma implements Runnable {
         this.piirtaja.repaint();
     }
 
+    /**
+     * 
+     * @param c (framen) Container johon komponentit laitetaan 
+     */
     private void luoKomponentit(Container c) {
 
         // menun näkymä
@@ -131,6 +141,10 @@ public class Kayttoliittyma implements Runnable {
         return menu;
     }
 
+    /**
+     * luo vaikeusasteen valintaan liittyvät komponentit
+     * @return JPanel jossa vaikeusaste napit
+     */
     private JPanel teeVaikeusAsteValinta() {
         JPanel ret = new JPanel(new GridLayout(1, 3));
 
@@ -182,7 +196,10 @@ public class Kayttoliittyma implements Runnable {
             // testit aiheuttaa tämän koska ne ei käynnistä run() metodia
         }
     }
-
+    
+    /**
+     * näytä tilastot käyttäjälle
+     */
     public void naytaTulokset() {
         Map<String, String> tiedot = tulokset.getTulokset();
         String teksti = "";

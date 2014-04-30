@@ -7,7 +7,7 @@
 package com.ilpo.theyellowsubmarine;
 
 /**
- *
+ * Pelin vaikeustaso
  * @author ilari
  */
 public enum Vaikeustaso {
