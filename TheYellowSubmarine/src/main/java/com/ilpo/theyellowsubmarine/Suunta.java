@@ -11,5 +11,12 @@ package com.ilpo.theyellowsubmarine;
  * @author ilari
  */
 public enum Suunta {
-    YLOS,ALAS,OIKEA,VASEN;
+    YLOS(0,-1),ALAS(0,1),OIKEA(1,0),VASEN(-1,0);
+    
+    public final int x,y;
+    
+    private Suunta(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
 }

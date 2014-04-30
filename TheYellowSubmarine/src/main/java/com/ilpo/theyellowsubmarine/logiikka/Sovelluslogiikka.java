@@ -17,15 +17,15 @@ import com.ilpo.theyellowsubmarine.mallit.Sukellusvene;
  * @author ilari
  */
 public class Sovelluslogiikka {
-    private final Kayttoliittyma kali;
+    private final Kayttoliittyma kayttoliittyma;
     private Thread peliSaie;
     private final Tulostenkeraaja stats;
     
     public Sovelluslogiikka(Kayttoliittyma kali){
-        this.kali = kali;
+        this.kayttoliittyma = kali;
         this.stats = new Tulostenkeraaja();
         Pelilogiikka peli = this.luoUusiPeli(Vaikeustaso.HELPPO);
-        this.kali.setLogiikka(peli);
+        this.kayttoliittyma.setLogiikka(peli);
     }
        
     /**
@@ -35,7 +35,7 @@ public class Sovelluslogiikka {
     public void lopetaPeli(boolean voitto){
         if (peliSaie==null) return;
         peliSaie.interrupt();
-        kali.siirryValikkoon(voitto);
+        kayttoliittyma.siirryValikkoon(voitto);
     }
     
     /**
@@ -44,8 +44,8 @@ public class Sovelluslogiikka {
      */
     public void aloitaPeli(Vaikeustaso vaikeus) {
         Pelilogiikka logiikka = luoUusiPeli(vaikeus);
-        kali.setLogiikka(logiikka);
-        kali.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene());
+        kayttoliittyma.setLogiikka(logiikka);
+        kayttoliittyma.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene());
         
         if (peliSaie!=null) peliSaie.interrupt();
         peliSaie = new Thread(logiikka);
@@ -58,11 +58,11 @@ public class Sovelluslogiikka {
      * @return uuden pelin logiikka
      */
     private Pelilogiikka luoUusiPeli(Vaikeustaso vaikeus){
-        int leveys = this.kali.getKartanLeveys();
-        int pituus = this.kali.getKartanPituus();
-        Kartta k = new Kartta(leveys,pituus,20,1);
-        Sukellusvene v = new Sukellusvene(k.getLeveys()/2, k.getPinta(),3000);
-        return new Pelilogiikka(kali,this, k, v, stats,vaikeus);
+        int leveys = this.kayttoliittyma.getKartanLeveys();
+        int pituus = this.kayttoliittyma.getKartanPituus();
+        Kartta kartta = new Kartta(leveys,pituus,20,1);
+        Sukellusvene vene = new Sukellusvene(kartta.getLeveys()/2, kartta.getPinta(),vaikeus.happimaara);
+        return new Pelilogiikka(kayttoliittyma,this, kartta, vene, stats,vaikeus);
     }
     
     public boolean peliKaynnissa(){

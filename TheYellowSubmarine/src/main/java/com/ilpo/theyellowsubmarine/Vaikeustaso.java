@@ -11,5 +11,11 @@ package com.ilpo.theyellowsubmarine;
  * @author ilari
  */
 public enum Vaikeustaso {
-    HELPPO, KESKIVAIKEA, VAIKEA;
+    HELPPO(4000), KESKIVAIKEA(3000), VAIKEA(2000);
+    
+    public final int happimaara;
+    
+    private Vaikeustaso(int happea){
+        this.happimaara = happea;
+    }
 }

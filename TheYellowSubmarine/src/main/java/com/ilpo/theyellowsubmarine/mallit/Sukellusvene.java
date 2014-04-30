@@ -122,8 +122,12 @@ public class Sukellusvene {
         this.nopeusX += accX;
         this.nopeusY += accY;
         
-        if (nopeusX>this.maxNopeus) nopeusX = maxNopeus;
-        if (nopeusY>this.maxNopeus) nopeusY = maxNopeus;
+        if (nopeusX>this.maxNopeus){
+            nopeusX = maxNopeus;
+        }
+        if (nopeusY>this.maxNopeus){
+            nopeusY = maxNopeus;
+        }
     }
 
     public boolean hengissa() {

@@ -6,9 +6,6 @@
 
 package com.ilpo.theyellowsubmarine.mallit;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  * Kivi jonka läpi pelaaja ei pääse
  * 
@@ -40,9 +37,11 @@ public class Kivi {
      */
     public boolean tormaa(Sukellusvene vene){
         int vx = vene.getVasenReuna(); int vy = vene.getYlareuna();
-        boolean a = (vene.getVasenReuna() <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+leveys);
-        boolean b = (vene.getYlareuna() <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + korkeus);
-        return a && b;
+        boolean xSuuntaViittaaTormaykseen = 
+                (vene.getVasenReuna() <= x&&x <= vene.getOikeaReuna() ) || (x <= vx&&vx <= x+leveys);
+        boolean ySuuntaViittaaTormaykseen = 
+                (vene.getYlareuna() <= y&&y <= vene.getAlareuna() ) || (y <= vy&&vy <= y + korkeus);
+        return xSuuntaViittaaTormaykseen && ySuuntaViittaaTormaykseen;
     }
     
     /**
@@ -53,10 +52,10 @@ public class Kivi {
      * @return true jos ja vain jos aarre ja ovat liian lähellä toisiaan
      */
     public boolean tormaa(Aarre aarre){
-        int ax = aarre.getX(); int ay = aarre.getY(); int r = aarre.getSade();
-        boolean a = x-r <= ax && ax <= x+leveys+r;
-        boolean b = y-r <= ay && ay <= y+leveys+r;
-        return a && b;
+        int ax = aarre.getX(); int ay = aarre.getY(); int sade = aarre.getSade();
+        boolean xSuuntaViittaaTormaykseen = x-sade <= ax && ax <= x+leveys+sade;
+        boolean ySuuntaViittaaTormaykseen = y-sade <= ay && ay <= y+leveys+sade;
+        return xSuuntaViittaaTormaykseen && ySuuntaViittaaTormaykseen;
     }
     
 

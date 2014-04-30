@@ -47,19 +47,18 @@ public class Tulostenkeraaja {
      * @return aiemmat tilastot sisältävä mappi
      */
     private HashMap<String, String> lueTulokset() {
-        HashMap<String, String> ret = new HashMap<>();
+        HashMap<String, String> tulosKartta = new HashMap<>();
         try {
             Scanner lukija = new Scanner(tiedosto);
             while (lukija.hasNextLine()) {
-                //System.out.println("line!");
-                String[] keyValuePair = lukija.nextLine().split(":");
-                ret.put(keyValuePair[1], keyValuePair[0]); // tiedostossa arvo:avain
+                String[] avainJaArvo = lukija.nextLine().split(":");
+                tulosKartta.put(avainJaArvo[1], avainJaArvo[0]); // tiedostossa arvo:avain
             }
         } catch (FileNotFoundException ex) {
-
+            Logger.getLogger(Tulostenkeraaja.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return ret;
+        return tulosKartta;
     }
     
     public HashMap<String,String> getTulokset(){
@@ -91,10 +90,10 @@ public class Tulostenkeraaja {
      */
     public void kirjoitaTulokset() {
         
-        try (PrintWriter pw = new PrintWriter(tiedosto)) {
+        try (PrintWriter kirjuri = new PrintWriter(tiedosto)) {
             for (String avain : this.tiedot.keySet()) {
-                String data = tiedot.get(avain) + ":" + avain + "\n";
-                pw.print(data);
+                String kirjoitettavaTieto = tiedot.get(avain) + ":" + avain + "\n";
+                kirjuri.print(kirjoitettavaTieto);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Tulostenkeraaja.class.getName()).log(Level.SEVERE, null, ex);

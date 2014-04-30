@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ilpo.theyellowsubmarine.logiikka;
 
 import com.ilpo.theyellowsubmarine.Suunta;
@@ -19,20 +18,22 @@ import java.util.logging.Logger;
 import static com.ilpo.theyellowsubmarine.logiikka.Tulostenkeraaja.*;
 
 /**
- * Pelin toimintaa ohjaava luokka.
- * Jokaisella pelillä on oma Logiikka-olionsa
+ * Pelin toimintaa ohjaava luokka. Jokaisella pelillä on oma Logiikka-olionsa
+ *
  * @author ilari
  */
-public class Pelilogiikka implements Runnable{
+public class Pelilogiikka implements Runnable {
+
     private final Kartta kartta;
     private final Sukellusvene vene;
     private final Fysiikka fysiikka;
     private final Kayttoliittyma kali;
-    private final Sovelluslogiikka sovlog;
+    private final Sovelluslogiikka sovelluslogiikka;
     private final Vaikeustaso vaikeus;
     private Tulostenkeraaja tulostenHoitaja;
+
     /**
-     * 
+     *
      * @param kali käyttöliittymä
      * @param sovlog sovelluslogiikka
      * @param kartta kartta jolla pelataan
@@ -40,31 +41,29 @@ public class Pelilogiikka implements Runnable{
      * @param stats tulostenkeraaja joka tallettaa pelin tulokset lopussa
      * @param vaikeus pelin vaikeustaso
      */
-    public Pelilogiikka(Kayttoliittyma kali,Sovelluslogiikka sovlog, Kartta kartta,
-            Sukellusvene vene, Tulostenkeraaja stats, Vaikeustaso vaikeus){
+    public Pelilogiikka(Kayttoliittyma kali, Sovelluslogiikka sovlog, Kartta kartta,
+            Sukellusvene vene, Tulostenkeraaja stats, Vaikeustaso vaikeus) {
         this.kartta = kartta;
         this.vene = vene;
         this.kali = kali;
-        this.sovlog = sovlog;
+        this.sovelluslogiikka = sovlog;
         this.fysiikka = new Fysiikka(this.vene);
         this.tulostenHoitaja = stats;
         this.vaikeus = vaikeus;
     }
-    
+
     /**
      * pelin "kello"
      */
     @Override
-    public void run(){
+    public void run() {
         boolean peliJatkuu;
-        while (true){
+        while (true) {
             try {
                 suorita();
                 kali.maalaa();
-                if (peliHavitty() || peliVoitettu()){
-                    keraaTulokset();
-                    this.tulostenHoitaja.kirjoitaTulokset();
-                    sovlog.lopetaPeli(peliVoitettu());
+                if (peliHavitty() || peliVoitettu()) {
+                    lopetaPeli();
                     break;
                 }
                 Thread.sleep(20);
@@ -73,134 +72,138 @@ public class Pelilogiikka implements Runnable{
             }
         }
     }
-    
-    public void keraaTulokset(){
-        if (peliVoitettu()){
+
+    /**
+     * hoida pelin lopussa tulosten kirjaus ja ilmoita sovelluslogiikalle
+     */
+    private void lopetaPeli() {
+        keraaTulokset();
+        this.tulostenHoitaja.kirjoitaTulokset();
+        sovelluslogiikka.lopetaPeli(peliVoitettu());
+    }
+
+    public void keraaTulokset() {
+        if (peliVoitettu()) {
             this.tulostenHoitaja.muutaTietoa(VOITOT, 1);
-        }else{
+        } else {
             this.tulostenHoitaja.muutaTietoa(HAVIOT, 1);
         }
         this.tulostenHoitaja.muutaTietoa(PELIT, 1);
-        
-        switch(vaikeus){
+
+        String tietue = RAHAT_H;
+        switch (vaikeus) {
             case HELPPO:
-                this.tulostenHoitaja.asetaTieto(RAHAT_H, vene.getRahat());
+                tietue = RAHAT_H;
                 break;
             case KESKIVAIKEA:
-                this.tulostenHoitaja.asetaTieto(RAHAT_M, vene.getRahat());
+                tietue = RAHAT_M;
                 break;
             case VAIKEA:
-                this.tulostenHoitaja.asetaTieto(RAHAT_V, vene.getRahat());
+                tietue = RAHAT_V;
                 break;
         }
+        this.tulostenHoitaja.asetaTieto(tietue, vene.getRahat());
     }
-    
+
     /**
-     * logiikan toiminnan päämetodi. Run kutsuu tätä tasaisesti
-     * (public koska testit :D)
-     * 
+     * logiikan toiminnan päämetodi. Run kutsuu tätä tasaisesti (public koska
+     * testit :D)
+     *
      */
-    public void suorita(){ // TODO: rename this
+    public void suorita() { // TODO: rename this
         //vene.liiku();
         this.fysiikka.seuraava();
         this.pidaPelaajaKartalla();
         this.tarkistaAarteet();
         this.tarkistaKivet();
-        if (this.vene.getY()>kartta.getPinta()){
+        if (this.vene.getY() > kartta.getPinta()) {
             this.vene.kulutaHappi();
         }
         //return vene.hengissa() && kartta.maalissa(vene.getX(), vene.getY());
     }
-    
-    public boolean peliVoitettu(){
+
+    /**
+     * onko pelaaja voittanut
+     * @return true joss peli on voitettu 
+     */
+    public boolean peliVoitettu() {
         return kartta.maalissa(vene.getX(), vene.getY());
     }
-    
-    public boolean peliHavitty(){
+
+    /**
+     * onko pelaaja hävinnyt
+     * @return true joss peli on hävitty
+     */
+    public boolean peliHavitty() {
         return !vene.hengissa();
     }
-    
+
     /**
      * muuttaa veneen liikettä. metodin kutsu muuttaa veneen nopeutta yhdellä
      * k.o. suuntaan
-     * @param suunta suunta johon sukellusvene lähtee kiihdyttämään 
+     *
+     * @param suunta suunta johon sukellusvene lähtee kiihdyttämään
      */
-    public void liiku(Suunta suunta){ 
-        int dx = 0;
-        int dy = 0;
-        switch (suunta){
-            case OIKEA:
-                dx = 1;
-                break;
-            case VASEN:
-                dx = -1;
-                break;
-            case ALAS:
-                dy = 1;
-                break;
-            case YLOS:
-                dy = -1;
-                break;
-        }
-        this.vene.kiihdyta(dx, dy);
+    public void liiku(Suunta suunta) {
+        this.vene.kiihdyta(suunta.x, suunta.y);
     }
-    
+
     /**
      * Pidä pelaaja kartalla
      */
-    private void pidaPelaajaKartalla(){
-        if (vene.getX()<0){
+    private void pidaPelaajaKartalla() {
+        if (vene.getX() < 0) {
             vene.setX(0);
             vene.pysahdyX();
         }
-        if (vene.getX() > kartta.getLeveys()){
+        if (vene.getX() > kartta.getLeveys()) {
             vene.setX(kartta.getLeveys());
             vene.pysahdyX();
         }
-        if (vene.getY()<kartta.getPinta()){
+        if (vene.getY() < kartta.getPinta()) {
             vene.setY(kartta.getPinta());
             vene.pysahdyY();
-        } 
-        if (vene.getY()> kartta.getKorkeus()){
+        }
+        if (vene.getY() > kartta.getKorkeus()) {
             vene.setY(kartta.getKorkeus());
             vene.pysahdyY();
         }
     }
-    
+
     /**
      * kerää aarteet jotka ovat tarpeeksi lähellä
      */
-    private void tarkistaAarteet(){
+    private void tarkistaAarteet() {
         Iterator<Aarre> aarteet = kartta.getAarteet().iterator();
         Aarre aarre;
-        while (aarteet.hasNext()){
+        while (aarteet.hasNext()) {
             aarre = aarteet.next();
-            if (aarre.voidaanKerata(vene)){
+            if (aarre.voidaanKerata(vene)) {
                 this.vene.lisaaRahaa(aarre.getArvo());
                 aarteet.remove();
             }
         }
     }
-    
+
     /**
      * tarkista ettei pelaaja kulje kivien läpi
      */
-    private void tarkistaKivet(){
-        for (Kivi kivi: kartta.getKivet()){
-            if (kivi.tormaa(vene)){
+    private void tarkistaKivet() {
+        for (Kivi kivi : kartta.getKivet()) {
+            if (kivi.tormaa(vene)) {
                 vene.liikuVaakatasossa(false); // arvaus
-                if (kivi.tormaa(vene)){
+                if (kivi.tormaa(vene)) {
                     vene.liikuVaakatasossa(true); // ei auttanut :(
                     vene.liikuPystytasossa(false);
                     vene.pysahdyY();
-                }else{
+                } else {
                     vene.pysahdyX();
                 }
             }
         }
     }
-    
-    public int getPelaajanRahat(){
+
+    public int getPelaajanRahat() {
         return this.vene.getRahat();
     }
 
@@ -211,5 +214,5 @@ public class Pelilogiikka implements Runnable{
     public Sukellusvene getVene() {
         return vene;
     }
-    
+
 }
