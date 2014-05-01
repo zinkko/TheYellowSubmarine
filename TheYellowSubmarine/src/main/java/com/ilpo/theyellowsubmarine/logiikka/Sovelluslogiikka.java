@@ -45,7 +45,7 @@ public class Sovelluslogiikka {
     public void aloitaPeli(Vaikeustaso vaikeus) {
         Pelilogiikka logiikka = luoUusiPeli(vaikeus);
         kayttoliittyma.setLogiikka(logiikka);
-        kayttoliittyma.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene());
+        kayttoliittyma.alustaPiirtaja(logiikka.getKartta(), logiikka.getVene(), vaikeus);
         
         if (peliSaie!=null) peliSaie.interrupt();
         peliSaie = new Thread(logiikka);

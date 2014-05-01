@@ -39,7 +39,7 @@ import javax.swing.WindowConstants;
 public class Kayttoliittyma implements Runnable {
 
     private final JFrame frame;
-    private final Piirtaja piirtaja;
+    private Piirtaja piirtaja;
     private JPanel cards;
     private Pelilogiikka logiikka;
     private Sovelluslogiikka sovlog;
@@ -58,7 +58,6 @@ public class Kayttoliittyma implements Runnable {
      */
     public Kayttoliittyma(int leveys, int pituus, Tulostenkeraaja tulokset) {
         this.frame = new JFrame();
-        this.piirtaja = new Piirtaja(leveys, pituus);
         this.leveys = leveys;
         this.pituus = pituus;
         this.tulokset = tulokset;
@@ -78,7 +77,10 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void maalaa() {
-        this.piirtaja.repaint();
+        if (this.piirtaja != null){
+           this.piirtaja.repaint(); 
+        }
+        
     }
 
     /**
@@ -95,7 +97,7 @@ public class Kayttoliittyma implements Runnable {
 
         //kortit
         this.cards = new JPanel(new CardLayout());
-        cards.add(this.piirtaja, PELI);
+        //cards.add(this.piirtaja, PELI);
         cards.add(menu, MENU);
 
         c.add(this.cards);
@@ -201,7 +203,7 @@ public class Kayttoliittyma implements Runnable {
      * näytä tilastot käyttäjälle
      */
     public void naytaTulokset() {
-        Map<String, String> tiedot = tulokset.getTulokset();
+        Map<String, Integer> tiedot = tulokset.getTulokset();
         String teksti = "";
         for (String avain : tiedot.keySet()){
             teksti += avain +": "+tiedot.get(avain)+"\n";
@@ -218,10 +220,11 @@ public class Kayttoliittyma implements Runnable {
      *
      * @param kartta
      * @param vene
+     * @param vaikeus pelin vaikeus
      */
-    public void alustaPiirtaja(Kartta kartta, Sukellusvene vene) {
-        this.piirtaja.setKartta(kartta);
-        this.piirtaja.setVene(vene);
+    public void alustaPiirtaja(Kartta kartta, Sukellusvene vene, Vaikeustaso vaikeus) {
+        this.piirtaja = new Piirtaja(kartta,vene, vaikeus);
+        cards.add(piirtaja, PELI);
     }
 
     /**

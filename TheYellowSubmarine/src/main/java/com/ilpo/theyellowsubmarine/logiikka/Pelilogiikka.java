@@ -102,7 +102,7 @@ public class Pelilogiikka implements Runnable {
                 tietue = RAHAT_V;
                 break;
         }
-        this.tulostenHoitaja.asetaTieto(tietue, vene.getRahat());
+        this.tulostenHoitaja.asetaTietoJosSuurempi(tietue,vene.getRahat());
     }
 
     /**

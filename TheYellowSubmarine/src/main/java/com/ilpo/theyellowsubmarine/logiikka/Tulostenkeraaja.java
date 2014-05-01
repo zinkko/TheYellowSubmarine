@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class Tulostenkeraaja {
 
     private final File tiedosto;
-    private final HashMap<String, String> tiedot;
+    private final HashMap<String, Integer> tiedot;
     
     public static final String PELIT = "pelit";
     public static final String VOITOT = "voitot";
@@ -46,13 +46,14 @@ public class Tulostenkeraaja {
      * lue tiedostosta tilastot ja luo niistä hajautustaulu
      * @return aiemmat tilastot sisältävä mappi
      */
-    private HashMap<String, String> lueTulokset() {
-        HashMap<String, String> tulosKartta = new HashMap<>();
+    private HashMap<String, Integer> lueTulokset() {
+        HashMap<String, Integer> tulosKartta = new HashMap<>();
         try {
             Scanner lukija = new Scanner(tiedosto);
             while (lukija.hasNextLine()) {
                 String[] avainJaArvo = lukija.nextLine().split(":");
-                tulosKartta.put(avainJaArvo[1], avainJaArvo[0]); // tiedostossa arvo:avain
+                int arvo = Integer.parseInt(avainJaArvo[0]);
+                tulosKartta.put(avainJaArvo[1], arvo); // tiedostossa arvo:avain
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Tulostenkeraaja.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +62,7 @@ public class Tulostenkeraaja {
         return tulosKartta;
     }
     
-    public HashMap<String,String> getTulokset(){
+    public HashMap<String,Integer> getTulokset(){
         return this.tiedot;
     }
     
@@ -72,8 +73,8 @@ public class Tulostenkeraaja {
      * @param arvo kuinka paljon kasvatetaan
      */
     public void muutaTietoa(String avain, int arvo){
-        int vanha = Integer.parseInt(tiedot.get(avain));
-        tiedot.put(avain, ""+(vanha+arvo));
+        int uusi = arvo + tiedot.get(avain);
+        tiedot.put(avain, uusi);
     }
     
     /**
@@ -82,7 +83,19 @@ public class Tulostenkeraaja {
      * @param arvo uusi arvo
      */
     public void asetaTieto(String avain, int arvo){
-        tiedot.put(avain, ""+arvo);
+        tiedot.put(avain, arvo);
+    }
+    
+    /**
+     * valitsee tilaston arvoksi suuremman aiemmasta ja uudesta arvosta
+     * 
+     * 
+     * @param avain tieto
+     * @param arvo arvo joka vaihdetaan jos vanha arvo pienempi
+     */
+    public void asetaTietoJosSuurempi(String avain, int arvo){
+        int uusi = Math.max(arvo, tiedot.get(avain));
+        tiedot.put(avain, uusi);
     }
 
     /**

@@ -6,6 +6,7 @@
 
 package com.ilpo.theyellowsubmarine.kayttoliittyma;
 
+import com.ilpo.theyellowsubmarine.Vaikeustaso;
 import com.ilpo.theyellowsubmarine.mallit.Aarre;
 import com.ilpo.theyellowsubmarine.mallit.Kartta;
 import com.ilpo.theyellowsubmarine.mallit.Kivi;
@@ -26,15 +27,9 @@ public class Piirtaja extends JPanel{
     private Sivupalkki palken;
     
 
-    public Piirtaja(int kartanleveys, int kartankorkeus){
-        this.palken = new Sivupalkki(kartanleveys-100, 0, 100,kartankorkeus ,3000); // poista taikaluvut
-    }
-
-    public void setKartta(Kartta kartta) {
+    public Piirtaja(Kartta kartta, Sukellusvene vene, Vaikeustaso vaikeus){
+        this.palken = new Sivupalkki(kartta.getLeveys(), 0, 100,kartta.getKorkeus() ,vaikeus.happimaara); // poista taikaluvut
         this.kartta = kartta;
-    }
-
-    public void setVene(Sukellusvene vene) {
         this.vene = vene;
     }
     
