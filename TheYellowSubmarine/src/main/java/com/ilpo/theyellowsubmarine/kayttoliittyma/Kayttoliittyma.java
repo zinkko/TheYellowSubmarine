@@ -223,6 +223,7 @@ public class Kayttoliittyma implements Runnable {
      * @param vaikeus pelin vaikeus
      */
     public void alustaPiirtaja(Kartta kartta, Sukellusvene vene, Vaikeustaso vaikeus) {
+        //cards.remove(this.piirtaja); // vanha piirtäjä pois
         this.piirtaja = new Piirtaja(kartta,vene, vaikeus);
         cards.add(piirtaja, PELI);
     }
