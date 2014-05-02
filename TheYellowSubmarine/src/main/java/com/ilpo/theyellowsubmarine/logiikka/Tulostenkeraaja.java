@@ -36,9 +36,10 @@ public class Tulostenkeraaja {
      * ohjelman suorituksen aikana.
      */
     public Tulostenkeraaja() {
-        String path = new File(".").getAbsolutePath();
-        path = path.replace(".", "src/main/java/com/ilpo/theyellowsubmarine/logiikka/tulokset.txt");
-        tiedosto = new File(path);
+        String polku = Tulostenkeraaja.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        polku = polku.replace("target/classes", "src/main/java/com/ilpo/theyellowsubmarine/logiikka/tulokset.txt");
+        //System.out.println(polku);
+        tiedosto = new File(polku);
         tiedot = lueTulokset();
     }
 
@@ -47,6 +48,7 @@ public class Tulostenkeraaja {
      * @return aiemmat tilastot sisältävä mappi
      */
     private HashMap<String, Integer> lueTulokset() {
+        System.out.println("pöö!");
         HashMap<String, Integer> tulosKartta = new HashMap<>();
         try {
             Scanner lukija = new Scanner(tiedosto);
