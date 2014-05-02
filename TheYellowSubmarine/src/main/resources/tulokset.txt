@@ -1,0 +1,6 @@
+4:häviöt
+4:voitot
+141:suurin kerätty rahamäärä (helppo)
+0:suurin kerätty rahamäärä (vaikea)
+0:suurin kerätty rahamäärä (keskivaikea)
+8:pelit

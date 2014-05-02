@@ -49,6 +49,7 @@ public class Kayttoliittyma implements Runnable {
     private final int pituus, leveys;
     private final Tulostenkeraaja tulokset;
     private Vaikeustaso vaikeus = HELPPO;
+    private boolean olenTesti = false;
 
     /**
      * 
@@ -61,6 +62,14 @@ public class Kayttoliittyma implements Runnable {
         this.leveys = leveys;
         this.pituus = pituus;
         this.tulokset = tulokset;
+    }
+    
+    /**
+     * TESTEILLE
+     */
+    public Kayttoliittyma(int l, int p, Tulostenkeraaja t, boolean olenTesti){
+        this(l,p,t);
+        this.olenTesti = true;
     }
 
     @Override
@@ -184,9 +193,9 @@ public class Kayttoliittyma implements Runnable {
      * @param voitto onko peli päättynyt voittoon
      */
     public void siirryValikkoon(boolean voitto) {
-        if (voitto){
+        if (voitto && !olenTesti){
             JOptionPane.showMessageDialog(frame, "Voitit! :D");
-        }else{
+        }else if (!olenTesti){
             JOptionPane.showMessageDialog(frame, "Hävisit pelin :(");
         }
         
