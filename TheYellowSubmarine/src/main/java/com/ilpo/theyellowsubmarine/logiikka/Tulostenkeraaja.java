@@ -17,13 +17,14 @@ import java.util.logging.Logger;
  * Luokka pelin tulosten tilastointiin. Kerää ja tallettaa tietoja esimerkiksi
  * voitetuiste sekä hävityistä peleistä. Muistaa tiedot aiemmilta peleiltä oman
  * tiedoston avulla (tulokset.txt)
+ *
  * @author ilari
  */
 public class Tulostenkeraaja {
 
     private final File tiedosto;
     private final HashMap<String, Integer> tiedot;
-    
+
     public static final String PELIT = "pelit";
     public static final String VOITOT = "voitot";
     public static final String HAVIOT = "häviöt";
@@ -36,13 +37,14 @@ public class Tulostenkeraaja {
      * ohjelman suorituksen aikana.
      */
     public Tulostenkeraaja() {
-        
+
         tiedosto = new File("src/main/resources/tulokset.txt");
         tiedot = lueTulokset();
     }
 
     /**
      * lue tiedostosta tilastot ja luo niistä hajautustaulu
+     *
      * @return aiemmat tilastot sisältävä mappi
      */
     private HashMap<String, Integer> lueTulokset() {
@@ -60,39 +62,40 @@ public class Tulostenkeraaja {
 
         return tulosKartta;
     }
-    
-    public HashMap<String,Integer> getTulokset(){
+
+    public HashMap<String, Integer> getTulokset() {
         return this.tiedot;
     }
-    
+
     /**
      * muuta joitain tietoa kasvattamalla sitä arvon verran.
-     * 
+     *
      * @param avain tieto jota muutetaan
      * @param arvo kuinka paljon kasvatetaan
      */
-    public void muutaTietoa(String avain, int arvo){
+    public void muutaTietoa(String avain, int arvo) {
         int uusi = arvo + tiedot.get(avain);
         tiedot.put(avain, uusi);
     }
-    
+
     /**
      * korvaa vanha tieto uudella
+     *
      * @param avain tieto
      * @param arvo uusi arvo
      */
-    public void asetaTieto(String avain, int arvo){
+    public void asetaTieto(String avain, int arvo) {
         tiedot.put(avain, arvo);
     }
-    
+
     /**
      * valitsee tilaston arvoksi suuremman aiemmasta ja uudesta arvosta
-     * 
-     * 
+     *
+     *
      * @param avain tieto
      * @param arvo arvo joka vaihdetaan jos vanha arvo pienempi
      */
-    public void asetaTietoJosSuurempi(String avain, int arvo){
+    public void asetaTietoJosSuurempi(String avain, int arvo) {
         int uusi = Math.max(arvo, tiedot.get(avain));
         tiedot.put(avain, uusi);
     }
@@ -101,7 +104,7 @@ public class Tulostenkeraaja {
      * kirjoita tilaston nykyinen tilanne tiedostoon
      */
     public void kirjoitaTulokset() {
-        
+
         try (PrintWriter kirjuri = new PrintWriter(tiedosto)) {
             for (String avain : this.tiedot.keySet()) {
                 String kirjoitettavaTieto = tiedot.get(avain) + ":" + avain + "\n";
