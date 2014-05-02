@@ -17,7 +17,7 @@ public class Sovellus{
         int ikkunanLeveys = 1000;
         Tulostenkeraaja tulokset = new Tulostenkeraaja();
         Kayttoliittyma kali = new Kayttoliittyma(ikkunanLeveys,ikkunanPituus, tulokset);
-        Sovelluslogiikka sovlog = new Sovelluslogiikka(kali);
+        Sovelluslogiikka sovlog = new Sovelluslogiikka(kali,tulokset);
         kali.setSovelluslogiikka(sovlog);
         SwingUtilities.invokeLater(kali);
     }

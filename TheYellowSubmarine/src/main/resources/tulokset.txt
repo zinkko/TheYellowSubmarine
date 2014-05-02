@@ -1,6 +1,6 @@
 7:häviöt
 153:suurin kerätty rahamäärä (helppo)
-8:voitot
-0:suurin kerätty rahamäärä (vaikea)
-0:suurin kerätty rahamäärä (keskivaikea)
-15:pelit
+10:voitot
+34:suurin kerätty rahamäärä (vaikea)
+7:suurin kerätty rahamäärä (keskivaikea)
+17:pelit

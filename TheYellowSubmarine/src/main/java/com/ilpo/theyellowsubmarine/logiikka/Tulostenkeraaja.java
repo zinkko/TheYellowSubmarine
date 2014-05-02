@@ -58,9 +58,21 @@ public class Tulostenkeraaja {
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Tulostenkeraaja.class.getName()).log(Level.SEVERE, null, ex);
+            return luoTyhjaKartta();
         }
 
         return tulosKartta;
+    }
+    
+    private HashMap<String,Integer> luoTyhjaKartta(){
+        HashMap<String,Integer> mappi = new HashMap<>();
+        mappi.put(VOITOT,0);
+        mappi.put(HAVIOT,0);
+        mappi.put(PELIT,0);
+        mappi.put(RAHAT_H,0);
+        mappi.put(RAHAT_M,0);
+        mappi.put(RAHAT_V,0);
+        return mappi;
     }
 
     public HashMap<String, Integer> getTulokset() {

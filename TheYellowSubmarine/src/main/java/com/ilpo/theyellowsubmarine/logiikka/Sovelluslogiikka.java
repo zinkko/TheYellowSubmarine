@@ -21,9 +21,9 @@ public class Sovelluslogiikka {
     private Thread peliSaie;
     private final Tulostenkeraaja stats;
     
-    public Sovelluslogiikka(Kayttoliittyma kali){
+    public Sovelluslogiikka(Kayttoliittyma kali, Tulostenkeraaja tulokset){
         this.kayttoliittyma = kali;
-        this.stats = new Tulostenkeraaja();
+        this.stats = tulokset;
         Pelilogiikka peli = this.luoUusiPeli(Vaikeustaso.HELPPO);
         this.kayttoliittyma.setLogiikka(peli);
     }
